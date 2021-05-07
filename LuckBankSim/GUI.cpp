@@ -146,9 +146,10 @@ void GUI::loadText(string inText)
 //This function is invoked from the game object to allocate the menucomponents
 void GUI::drawMenuItems()
 {
-
     loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
+    loadPlayImage("Images\\SAVE.jpg", 400, 200, 0.5, 0.5);
 }
+
 void GUI::drawText()
 {
 
@@ -308,7 +309,7 @@ void GUI::loadDiceSides()
 void GUI::drawRollDice()
 {
     // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 35)
+    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 20)
     {
        int  dicePicNumber = rand() % 6;
         diceRect.setTexture(&diceTexture[dicePicNumber]);
@@ -318,5 +319,5 @@ void GUI::drawRollDice()
    //draw the new side
    window.draw(diceRect);
 
-    if (numberOfRolling <= 100) numberOfRolling++;
+   if (numberOfRolling <= 100) numberOfRolling++;
 }

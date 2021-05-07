@@ -1,2 +1,10 @@
-﻿  GUI.cpp
+﻿  Dice.cpp
+  Edge.cpp
+  Menu.cpp
+  MessageBox.cpp
+  Text.cpp
+  GUI.cpp
+  Game.cpp
+  main.cpp
+  Generating Code...
   LuckBankSim.vcxproj -> C:\Users\as\Desktop\Team Phoenix\Debug\LuckBankSim.exe
