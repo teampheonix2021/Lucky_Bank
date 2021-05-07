@@ -19,12 +19,13 @@ private:
         backgroundColor = sf::Color::White,
         outlineColor = sf::Color:: Black,
         ballFillColor = sf::Color::White,
+        Red = sf::Color::Red,
         flipperFillColor = sf::Color::White;
     const float outlineThickness = -1.0f;  // Negative sign means inwards
 
 
-    sf::RectangleShape textRect, playRect, diceRect, okButton; // Rectangle edges of the board components
-    sf::Texture diceTexture[3];// dicesides
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton; // Rectangle edges of the board components
+    sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
     bool diceIsRolled = 0;// variable for checking if the dice is rolled

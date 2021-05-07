@@ -5,7 +5,7 @@ GUI::GUI()
 {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;  // Remove this line if the Board was too laggy
-    window.create(sf::VideoMode(BOARD_WIDTH, BOARD_HEIGHT), " Bank of Luck Simulation");
+    window.create(sf::VideoMode(BOARD_WIDTH, BOARD_HEIGHT), "Pheonix");
     window.setVerticalSyncEnabled(true);
 
 //load the dice sides array 
@@ -103,7 +103,7 @@ void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY
     playRect.setSize(sf::Vector2f(65.0f, 65.0f));
     playRect.setOutlineThickness(outlineThickness);
     playRect.setOutlineColor(outlineColor);
-    playRect.setPosition(40, 40);
+    playRect.setPosition(725, 750);
 
     window.draw(playRect);
     window.draw(sprite);
@@ -127,7 +127,7 @@ void GUI::loadText(string inText)
     // set the text style
     text.setStyle(sf::Text::Bold);
     //set the text position
-    text.setPosition(650.0f, 650.0f);
+    text.setPosition(628.0f,470.0f);
     
    // Create Dice Edge, which can be used for applying events on the text
     textRect.setSize(sf::Vector2f(450.0f, 35.0f));
@@ -146,10 +146,10 @@ void GUI::loadText(string inText)
 //This function is invoked from the game object to allocate the menucomponents
 void GUI::drawMenuItems()
 {
-
-    loadPlayImage("Images\\playImage.png", 50, 50, 0.5, 0.5);
-    
+    loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
+    loadPlayImage("Images\\SAVE.jpg", 400, 200, 0.5, 0.5);
 }
+
 void GUI::drawText()
 {
 
@@ -204,25 +204,88 @@ void GUI::drawEdge(float position, bool EdgeDir)
     {
         sf::Vertex line[] =
         {
-                sf::Vertex(sf::Vector2f(position,200), outlineColor),
-                sf::Vertex(sf::Vector2f(position, BOARD_HEIGHT - 200), outlineColor)
+                sf::Vertex(sf::Vector2f(300,50), outlineColor),
+                sf::Vertex(sf::Vector2f(300, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(400,50), outlineColor),
+                sf::Vertex(sf::Vector2f(400, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(500,50), outlineColor),
+                sf::Vertex(sf::Vector2f(500, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(600,50), outlineColor),
+                sf::Vertex(sf::Vector2f(600, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(700,50), outlineColor),
+                sf::Vertex(sf::Vector2f(700, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(800,50), outlineColor),
+                sf::Vertex(sf::Vector2f(800, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(900,50), outlineColor),
+                sf::Vertex(sf::Vector2f(900, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(1000,50), outlineColor),
+                sf::Vertex(sf::Vector2f(1000, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(1100,50), outlineColor),
+                sf::Vertex(sf::Vector2f(1100, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(1200,50), outlineColor),
+                sf::Vertex(sf::Vector2f(1200, BOARD_HEIGHT - 750), outlineColor),
+                sf::Vertex(sf::Vector2f(300,550), outlineColor),
+                sf::Vertex(sf::Vector2f(300, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(400,750), outlineColor),
+                sf::Vertex(sf::Vector2f(400, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(500,750), outlineColor),
+                sf::Vertex(sf::Vector2f(500, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(600,750), outlineColor),
+                sf::Vertex(sf::Vector2f(600, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(700,750), outlineColor),
+                sf::Vertex(sf::Vector2f(700, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(800,750), outlineColor),
+                sf::Vertex(sf::Vector2f(800, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(900,750), outlineColor),
+                sf::Vertex(sf::Vector2f(900, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(1000,750), outlineColor),
+                sf::Vertex(sf::Vector2f(1000, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(1100,750), outlineColor),
+                sf::Vertex(sf::Vector2f(1100, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(1200,100), outlineColor),
+                sf::Vertex(sf::Vector2f(1200, BOARD_HEIGHT - 50), outlineColor),
+                sf::Vertex(sf::Vector2f(position,50), outlineColor),
+                sf::Vertex(sf::Vector2f(position, BOARD_HEIGHT - 50), outlineColor),
+
         };
-        window.draw(line, 2, sf::Lines);
+        window.draw(line, 50, sf::Lines);
     }
 
     else if (EdgeDir == 1) // Condition for drawing the horizontal Edge
-
     {
         sf::Vertex line[] =
         {
-          sf::Vertex(sf::Vector2f(200, position), outlineColor),
-          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 200, position), outlineColor)
+          sf::Vertex(sf::Vector2f(200, 750), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 200, 750), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 850), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 200, 850), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 50), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 200, 50), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 150), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 200, 150), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 650), outlineColor),
+          sf::Vertex(sf::Vector2f(300, 650), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(300, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 450), outlineColor),
+          sf::Vertex(sf::Vector2f(300, 450), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(300, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(200, 250), outlineColor),
+          sf::Vertex(sf::Vector2f(300, 250), outlineColor),
+          sf::Vertex(sf::Vector2f(1200, 650), outlineColor),
+          sf::Vertex(sf::Vector2f(1300, 650), outlineColor),
+          sf::Vertex(sf::Vector2f(1200, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(1300, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(1200, 450), outlineColor),
+          sf::Vertex(sf::Vector2f(1300, 450), outlineColor),
+          sf::Vertex(sf::Vector2f(1200, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(1300, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(1200, 250), outlineColor),
+          sf::Vertex(sf::Vector2f(1300, 250), outlineColor),
         };
-        window.draw(line, 2, sf::Lines);
+        window.draw(line, 30, sf::Lines);
     }
-
-
-
 }
 
 
@@ -230,23 +293,25 @@ void GUI::drawEdge(float position, bool EdgeDir)
 // Create pool of dice sides
 void GUI::loadDiceSides()
 {
-
     diceRect.setSize(sf::Vector2f(DICEX, DICEY));
-    diceRect.setPosition(732.0f, 590.0f);
+    diceRect.setPosition(720.0f, 410.0f);
     //You should add more lines and images for more dice sides
     diceTexture[0].loadFromFile("Images/dice/1.png");
     diceTexture[1].loadFromFile("Images/dice/2.png");
     diceTexture[2].loadFromFile("Images/dice/3.png");
-    for (int i = 0; i < 3; i++)
+    diceTexture[3].loadFromFile("Images/dice/4.png");
+    diceTexture[4].loadFromFile("Images/dice/5.png");
+    diceTexture[5].loadFromFile("Images/dice/6.png");
+    for (int i = 0; i < 6; i++)
         diceTexture[i].setSmooth(true);    
 }
 // //this function is invoked from dice object to roll the dice
 void GUI::drawRollDice()
 {
     // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 35)
+    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 20)
     {
-       int  dicePicNumber = rand() % 3;
+       int  dicePicNumber = rand() % 6;
         diceRect.setTexture(&diceTexture[dicePicNumber]);
         lastRoll = numberOfRolling;
        
@@ -254,5 +319,5 @@ void GUI::drawRollDice()
    //draw the new side
    window.draw(diceRect);
 
-    if (numberOfRolling <= 100) numberOfRolling++;
+   if (numberOfRolling <= 100) numberOfRolling++;
 }

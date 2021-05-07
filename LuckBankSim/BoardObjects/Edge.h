@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Drawable.h"
 
 // Represents the spaces Edge
@@ -11,10 +10,7 @@ private:
     
 
 public:
+  
     explicit Edge(float position, bool EdgeDirection);
     void draw(GUI& gui) override;
-
-
-
-
 };
