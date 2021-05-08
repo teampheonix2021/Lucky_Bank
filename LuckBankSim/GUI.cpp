@@ -8,18 +8,39 @@ GUI::GUI()
     window.create(sf::VideoMode(BOARD_WIDTH, BOARD_HEIGHT), "Pheonix");
     window.setVerticalSyncEnabled(true);
 
-//load the dice sides array 
+
+   //load the dice sides array 
    loadDiceSides();
 }
+
 // Function for getting control on any event such as keyboard or mouse 
 void GUI::getControls(bool& exit)
 {
     sf::Event event;
-
     //check the window events
-    while (window.pollEvent(event))
-        
+    while (window.pollEvent(event)) 
     {
+        sf::Vector2f mousePos2 = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        sf::FloatRect diceBtnBounds2 = diceRect.getGlobalBounds();
+        sf::FloatRect saveBtnBounds2 = rectangle[0].getGlobalBounds();
+        sf::FloatRect playBtnBounds2 = playRect.getGlobalBounds();
+        if (diceBtnBounds2.contains(mousePos2) && event.TouchEnded)
+        {
+            textbox = 1;
+        }
+        else if (saveBtnBounds2.contains(mousePos2) && event.TouchEnded)
+        {
+            textbox = 2;
+        }
+        else if (playBtnBounds2.contains(mousePos2) && event.TouchEnded)
+        {
+            textbox = 3;
+        }
+        else
+        {
+            textbox = 0;
+        }
+
         //if ESC button is pressed the game window is closed!
        exit = sf::Keyboard::isKeyPressed(sf::Keyboard::Escape);
 
@@ -35,6 +56,7 @@ void GUI::getControls(bool& exit)
             sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             sf::FloatRect diceBtnBounds = diceRect.getGlobalBounds();
             sf::FloatRect playBtnBounds = playRect.getGlobalBounds();
+            sf::FloatRect saveBtnBounds = rectangle[0].getGlobalBounds();
 
             //if the mouse left button is pressed on the dice button, the side is changed
             if (diceBtnBounds.contains(mousePos))
@@ -56,8 +78,6 @@ void GUI::getControls(bool& exit)
                 messagePrompt.setVerticalSyncEnabled(true);
 
             }
-
-
         }
     }//loop of window event
 
@@ -104,13 +124,19 @@ void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY
     playRect.setOutlineThickness(outlineThickness);
     playRect.setOutlineColor(outlineColor);
     playRect.setPosition(43, 94);
+    
+    rectangle[0].setSize(sf::Vector2f(65.0f, 65.0f));
+    rectangle[0].setOutlineThickness(outlineThickness);
+    rectangle[0].setOutlineColor(outlineColor);
+    rectangle[0].setPosition(43, 194);
 
     window.draw(playRect,multiplicativeBlending);
+    window.draw(rectangle[0], multiplicativeBlending);
     window.draw(sprite);
 }
 
 //This function can be changes to load arrays of text  according to the game components and adding more arguments for the positions
-void GUI::loadText(string inText)
+void GUI::loadText(std::string inText, float offsetPositionX, float offsetPositionY)
 {
     
     // select the font
@@ -126,7 +152,7 @@ void GUI::loadText(string inText)
     // set the text style
     text.setStyle(sf::Text::Bold);
     //set the text position
-    text.setPosition(628.0f,470.0f);
+    text.setPosition(offsetPositionX,offsetPositionY);
     
    // Create Dice Edge, which can be used for applying events on the text
     textRect.setSize(sf::Vector2f(450.0f, 35.0f));
@@ -135,7 +161,7 @@ void GUI::loadText(string inText)
     textRect.setPosition(628.0f, 470.0f);
 
 
-    window.draw(textRect, sf::RenderStates());
+    window.draw(textRect,multiplicativeBlending);
     window.draw(text, sf::RenderStates());
   
 }
@@ -151,7 +177,8 @@ void GUI::drawMenuItems()
 void GUI::drawText()
 {
 
-    loadText("Please click here to roll the dice");
+    loadText("Please click here to roll the dice", 628.0f, 470.0f);
+    loadText("TEST", 240, 500);
 }
 
 //this function is invoked from messagebox object to popup the message box
@@ -327,7 +354,7 @@ void GUI::loadDiceSides()
 void GUI::drawRollDice()
 {
     // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 20)
+    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 8)
     {
        int  dicePicNumber = rand() % 6;
         diceRect.setTexture(&diceTexture[dicePicNumber]);
@@ -355,4 +382,41 @@ void GUI::drawrect()
     rectangle[1].setPosition(600, 400);
     window.draw(rectangle[0]);
     window.draw(rectangle[1]);*/
+}
+
+
+void GUI::loadtextbox(string textbox)
+{
+    sf::Font font;
+    font.loadFromFile(ARIAL_FONT);
+    text.setFont(font); 
+    text.setString(textbox);
+    text.setCharacterSize(15);
+    text.setFillColor(outlineColor);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(50, 800);
+    window.draw(text, sf::RenderStates());
+}
+
+void GUI::drawtextbox()
+{
+    if (textbox == 1)
+    {
+        loadtextbox("Dice" );
+    }
+
+    if (textbox == 2)
+    {
+        loadtextbox("Save Button");
+    }
+
+    if (textbox == 3)
+    {
+        loadtextbox("Play Button");
+    }
+}
+
+void GUI::settextbox(int x)
+{
+    textbox = x;
 }

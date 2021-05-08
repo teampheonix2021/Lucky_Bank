@@ -43,6 +43,8 @@ void Game::updateGUIOutput()
 
     messageBox.draw(gui);
    
+    //drawing the text box to the user
+    textbo.draw(gui);
 
   /// Rolling the dice
     dice.draw(gui);

@@ -12,6 +12,8 @@
 class GUI
 {
 private:
+    int textbox = 0;
+
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
     
@@ -29,8 +31,8 @@ private:
         flipperFillColor = sf::Color::White;
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
-    int size = 2;
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton, *rectangle = new sf::RectangleShape[size]; // Rectangle edges of the board components
+
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4]; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -44,7 +46,7 @@ public:
     
    
     void loadPlayImage(string path, float offsetPositionX, float offsetPositionY, float scaleX, float scaleY);//Loading image as a texture and drawing the texture using sprite
-    void loadText(string inText);//For drawing text
+    void loadText(string inText, float offsetPositionX, float offsetPositionY);//For drawing text
     void drawMessageBox();// Drawing message box object
     void drawMenuItems();// Drawng Tool bar menu
     void drawText(); //draw the text on the board
@@ -52,5 +54,8 @@ public:
     void loadDiceSides();//load dice side in textures
     void drawRollDice();// rolling the dice
 
-    void drawrect();
+    void drawrect(); //draw rectangle as you want
+    void loadtextbox(string textbox); //display the text box
+    void drawtextbox();
+    void settextbox(int x);
 };

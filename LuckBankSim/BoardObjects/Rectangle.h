@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include "BoardObjects/Drawable.h"
+#include "Drawable.h"
 
-// Represents the dice of the game
+// draw rectangles
 class rectangle : public Drawable
 {
 
