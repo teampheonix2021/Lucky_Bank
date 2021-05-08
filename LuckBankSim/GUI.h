@@ -17,7 +17,7 @@ private:
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
     
-    //Blending mode, mix between the image and the rectangle
+    //Blending mode, mix between the image and the rectangle-credits to ENG KAREEEEEEEEEEEEEEEEEEEEEEEM*******
     sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
     sf::BlendMode alphaBlending = sf::BlendAlpha;
     sf::BlendMode additiveBlending = sf::BlendAdd;

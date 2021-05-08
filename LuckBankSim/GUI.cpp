@@ -132,6 +132,33 @@ void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY
 
     window.draw(playRect,multiplicativeBlending);
     window.draw(rectangle[0], multiplicativeBlending);
+    rectangle[0].setSize(sf::Vector2f(65.0f, 65.0f));
+    rectangle[0].setOutlineThickness(outlineThickness);
+    rectangle[0].setOutlineColor(outlineColor);
+    rectangle[0].setPosition(54, 50);
+
+    window.draw(rectangle[0],multiplicativeBlending);
+
+    rectangle[1].setSize(sf::Vector2f(65.0f, 65.0f));
+    rectangle[1].setOutlineThickness(outlineThickness);
+    rectangle[1].setOutlineColor(outlineColor);
+    rectangle[1].setPosition(54, 150);
+
+    window.draw(rectangle[1], multiplicativeBlending);
+
+    rectangle[2].setSize(sf::Vector2f(65.0f, 65.0f));
+    rectangle[2].setOutlineThickness(outlineThickness);
+    rectangle[2].setOutlineColor(outlineColor);
+    rectangle[2].setPosition(54, 250);
+
+    window.draw(rectangle[2], multiplicativeBlending);
+
+    rectangle[3].setSize(sf::Vector2f(65.0f, 65.0f));
+    rectangle[3].setOutlineThickness(outlineThickness);
+    rectangle[3].setOutlineColor(outlineColor);
+    rectangle[3].setPosition(54, 350);
+
+    window.draw(rectangle[3], multiplicativeBlending);
     window.draw(sprite);
 }
 
@@ -170,8 +197,11 @@ void GUI::loadText(std::string inText, float offsetPositionX, float offsetPositi
 //This function is invoked from the game object to allocate the menucomponents
 void GUI::drawMenuItems()
 {
-    loadPlayImage("Images\\playImage.png", 50, 100, 0.5, 0.5);
-    loadPlayImage("Images\\SAVE.jpg", 50, 200, 0.5, 0.5);
+    loadPlayImage("Images\\Start.jpg", 60, 56, 0.5, 0.5);
+    loadPlayImage("Images\\SAVE.jpg", 60, 156, 0.5, 0.5);
+    loadPlayImage("Images\\Load.png", 60, 256, 0.5, 0.5);
+    loadPlayImage("Images\\End.jpg", 60, 356, 0.5, 0.5);
+    
 }
 
 void GUI::drawText()
