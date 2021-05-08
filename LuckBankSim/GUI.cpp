@@ -146,10 +146,9 @@ void GUI::loadText(string inText)
 //This function is invoked from the game object to allocate the menucomponents
 void GUI::drawMenuItems()
 {
-    loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
-    //loadPlayImage("Images\\SAVE.jpg", 400, 200, 0.5, 0.5);
-}
 
+    loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
+}
 void GUI::drawText()
 {
 
@@ -247,19 +246,8 @@ void GUI::drawEdge(float position, bool EdgeDir)
                 sf::Vertex(sf::Vector2f(position,50), outlineColor),
                 sf::Vertex(sf::Vector2f(position, BOARD_HEIGHT - 50), outlineColor),
 
-
-                //luck and court squares 
-               sf::Vertex(sf::Vector2f(950,200), outlineColor),
-                sf::Vertex(sf::Vector2f(950, BOARD_HEIGHT - 550), outlineColor),
-                sf::Vertex(sf::Vector2f(1100,200), outlineColor),
-                sf::Vertex(sf::Vector2f(1100, BOARD_HEIGHT - 550), outlineColor),
-
-                sf::Vertex(sf::Vector2f(400,550), outlineColor),
-                sf::Vertex(sf::Vector2f(400, BOARD_HEIGHT - 200), outlineColor),
-                sf::Vertex(sf::Vector2f(550,550), outlineColor),
-                sf::Vertex(sf::Vector2f(550, BOARD_HEIGHT -200 ), outlineColor),
         };
-        window.draw(line, 80, sf::Lines);
+        window.draw(line, 50, sf::Lines);
     }
 
     else if (EdgeDir == 1) // Condition for drawing the horizontal Edge
@@ -294,20 +282,8 @@ void GUI::drawEdge(float position, bool EdgeDir)
           sf::Vertex(sf::Vector2f(1300, 350), outlineColor),
           sf::Vertex(sf::Vector2f(1200, 250), outlineColor),
           sf::Vertex(sf::Vector2f(1300, 250), outlineColor),
-
-          //luck and court squares 
-          sf::Vertex(sf::Vector2f(400,700 ), outlineColor),
-          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 950, 700), outlineColor),
-          sf::Vertex(sf::Vector2f(400, 550), outlineColor),
-          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 950, 550), outlineColor),
-          sf::Vertex(sf::Vector2f(950, 200), outlineColor),
-          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 400, 200), outlineColor),
-          sf::Vertex(sf::Vector2f(950, 350), outlineColor),
-          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 400, 350), outlineColor),
-
-
         };
-        window.draw(line, 40, sf::Lines);
+        window.draw(line, 30, sf::Lines);
     }
 }
 
@@ -332,7 +308,7 @@ void GUI::loadDiceSides()
 void GUI::drawRollDice()
 {
     // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 20)
+    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 35)
     {
        int  dicePicNumber = rand() % 6;
         diceRect.setTexture(&diceTexture[dicePicNumber]);
@@ -342,6 +318,5 @@ void GUI::drawRollDice()
    //draw the new side
    window.draw(diceRect);
 
-   if (numberOfRolling <= 100) numberOfRolling++;
+    if (numberOfRolling <= 100) numberOfRolling++;
 }
-
