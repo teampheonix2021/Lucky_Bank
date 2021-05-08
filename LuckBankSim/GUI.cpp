@@ -103,13 +103,12 @@ void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY
     playRect.setSize(sf::Vector2f(65.0f, 65.0f));
     playRect.setOutlineThickness(outlineThickness);
     playRect.setOutlineColor(outlineColor);
-    playRect.setPosition(725, 750);
+    playRect.setPosition(43, 94);
 
-    window.draw(playRect);
+    window.draw(playRect,multiplicativeBlending);
     window.draw(sprite);
-
-    
 }
+
 //This function can be changes to load arrays of text  according to the game components and adding more arguments for the positions
 void GUI::loadText(string inText)
 {
@@ -138,16 +137,15 @@ void GUI::loadText(string inText)
 
     window.draw(textRect, sf::RenderStates());
     window.draw(text, sf::RenderStates());
-   
-
+  
 }
 
 
 //This function is invoked from the game object to allocate the menucomponents
 void GUI::drawMenuItems()
 {
-    loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
-    //loadPlayImage("Images\\SAVE.jpg", 400, 200, 0.5, 0.5);
+    loadPlayImage("Images\\playImage.png", 50, 100, 0.5, 0.5);
+    loadPlayImage("Images\\SAVE.jpg", 50, 200, 0.5, 0.5);
 }
 
 void GUI::drawText()
@@ -155,7 +153,6 @@ void GUI::drawText()
 
     loadText("Please click here to roll the dice");
 }
-
 
 //this function is invoked from messagebox object to popup the message box
 void GUI::drawMessageBox()
@@ -341,4 +338,21 @@ void GUI::drawRollDice()
    window.draw(diceRect);
 
    if (numberOfRolling <= 100) numberOfRolling++;
+}
+
+    //function to draw rectangles
+void GUI::drawrect()
+{
+    //change the size in GUI.h first to increase the number of rectangles
+   /* rectangle[0].setSize(sf::Vector2f(200, 200));
+    rectangle[0].setFillColor(outlineColor);
+    rectangle[0].setOutlineThickness(outlineThickness);
+    rectangle[0].setPosition(300, 400);
+
+    rectangle[1].setSize(sf::Vector2f(200, 200));
+    rectangle[1].setFillColor(sf::Color::Black);
+    rectangle[1].setOutlineThickness(outlineThickness);
+    rectangle[1].setPosition(600, 400);
+    window.draw(rectangle[0]);
+    window.draw(rectangle[1]);*/
 }

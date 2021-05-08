@@ -34,7 +34,10 @@ void Game::updateGUIOutput()
     rightEdge.draw(gui);
     upEdge.draw(gui);
     bottomEdge.draw(gui);
-     menu.draw(gui);
+    menu.draw(gui);
+
+   //Drawing rectangles
+    rect.draw(gui);
     
    //Drawing the message box
 

@@ -147,6 +147,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="BoardObjects\Drawable.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="Rectangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoardObjects\Dice.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="BoardObjects\MessageBox.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\7azzakSpace.png" />
