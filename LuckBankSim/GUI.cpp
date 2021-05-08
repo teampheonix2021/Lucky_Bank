@@ -133,7 +133,7 @@ void GUI::loadText(string inText)
     textRect.setSize(sf::Vector2f(450.0f, 35.0f));
     textRect.setOutlineThickness(0); // can be outlineThickness to show border
     textRect.setOutlineColor(outlineColor);
-    textRect.setPosition(530.0f, 650.0f);
+    textRect.setPosition(628.0f, 470.0f);
 
 
     window.draw(textRect, sf::RenderStates());
@@ -147,7 +147,7 @@ void GUI::loadText(string inText)
 void GUI::drawMenuItems()
 {
     loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
-    loadPlayImage("Images\\SAVE.jpg", 400, 200, 0.5, 0.5);
+    //loadPlayImage("Images\\SAVE.jpg", 400, 200, 0.5, 0.5);
 }
 
 void GUI::drawText()
@@ -247,8 +247,17 @@ void GUI::drawEdge(float position, bool EdgeDir)
                 sf::Vertex(sf::Vector2f(position,50), outlineColor),
                 sf::Vertex(sf::Vector2f(position, BOARD_HEIGHT - 50), outlineColor),
 
+               //LUCK AND COURT RECT
+               sf::Vertex(sf::Vector2f(950,200), outlineColor),
+               sf::Vertex(sf::Vector2f(950, BOARD_HEIGHT - 550), outlineColor),
+               sf::Vertex(sf::Vector2f(1100,200), outlineColor),
+               sf::Vertex(sf::Vector2f(1100, BOARD_HEIGHT - 550), outlineColor),
+               sf::Vertex(sf::Vector2f(400,550), outlineColor),
+               sf::Vertex(sf::Vector2f(400, BOARD_HEIGHT - 200), outlineColor),
+               sf::Vertex(sf::Vector2f(550,550), outlineColor),
+               sf::Vertex(sf::Vector2f(550, BOARD_HEIGHT - 200), outlineColor),
         };
-        window.draw(line, 50, sf::Lines);
+        window.draw(line, 70, sf::Lines);
     }
 
     else if (EdgeDir == 1) // Condition for drawing the horizontal Edge
@@ -283,8 +292,20 @@ void GUI::drawEdge(float position, bool EdgeDir)
           sf::Vertex(sf::Vector2f(1300, 350), outlineColor),
           sf::Vertex(sf::Vector2f(1200, 250), outlineColor),
           sf::Vertex(sf::Vector2f(1300, 250), outlineColor),
+
+          //LUCK AND COURT RECT
+          sf::Vertex(sf::Vector2f(950, 200), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 400, 200), outlineColor),
+          sf::Vertex(sf::Vector2f(950, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 400, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(400, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 950, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(400, 700), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 950, 700), outlineColor),
+
+
         };
-        window.draw(line, 30, sf::Lines);
+        window.draw(line, 50, sf::Lines);
     }
 }
 
