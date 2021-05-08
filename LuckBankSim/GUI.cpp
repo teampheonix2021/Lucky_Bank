@@ -103,13 +103,12 @@ void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY
     playRect.setSize(sf::Vector2f(65.0f, 65.0f));
     playRect.setOutlineThickness(outlineThickness);
     playRect.setOutlineColor(outlineColor);
-    playRect.setPosition(725, 750);
+    playRect.setPosition(43, 94);
 
-    window.draw(playRect);
+    window.draw(playRect,multiplicativeBlending);
     window.draw(sprite);
-
-    
 }
+
 //This function can be changes to load arrays of text  according to the game components and adding more arguments for the positions
 void GUI::loadText(string inText)
 {
@@ -133,28 +132,27 @@ void GUI::loadText(string inText)
     textRect.setSize(sf::Vector2f(450.0f, 35.0f));
     textRect.setOutlineThickness(0); // can be outlineThickness to show border
     textRect.setOutlineColor(outlineColor);
-    textRect.setPosition(530.0f, 650.0f);
+    textRect.setPosition(628.0f, 470.0f);
 
 
     window.draw(textRect, sf::RenderStates());
     window.draw(text, sf::RenderStates());
-   
-
+  
 }
 
 
 //This function is invoked from the game object to allocate the menucomponents
 void GUI::drawMenuItems()
 {
-
-    loadPlayImage("Images\\playImage.png", 732, 756, 0.5, 0.5);
+    loadPlayImage("Images\\playImage.png", 50, 100, 0.5, 0.5);
+    loadPlayImage("Images\\SAVE.jpg", 50, 200, 0.5, 0.5);
 }
+
 void GUI::drawText()
 {
 
     loadText("Please click here to roll the dice");
 }
-
 
 //this function is invoked from messagebox object to popup the message box
 void GUI::drawMessageBox()
@@ -246,8 +244,17 @@ void GUI::drawEdge(float position, bool EdgeDir)
                 sf::Vertex(sf::Vector2f(position,50), outlineColor),
                 sf::Vertex(sf::Vector2f(position, BOARD_HEIGHT - 50), outlineColor),
 
+               //LUCK AND COURT RECT
+               sf::Vertex(sf::Vector2f(950,200), outlineColor),
+               sf::Vertex(sf::Vector2f(950, BOARD_HEIGHT - 550), outlineColor),
+               sf::Vertex(sf::Vector2f(1100,200), outlineColor),
+               sf::Vertex(sf::Vector2f(1100, BOARD_HEIGHT - 550), outlineColor),
+               sf::Vertex(sf::Vector2f(400,550), outlineColor),
+               sf::Vertex(sf::Vector2f(400, BOARD_HEIGHT - 200), outlineColor),
+               sf::Vertex(sf::Vector2f(550,550), outlineColor),
+               sf::Vertex(sf::Vector2f(550, BOARD_HEIGHT - 200), outlineColor),
         };
-        window.draw(line, 50, sf::Lines);
+        window.draw(line, 70, sf::Lines);
     }
 
     else if (EdgeDir == 1) // Condition for drawing the horizontal Edge
@@ -282,8 +289,20 @@ void GUI::drawEdge(float position, bool EdgeDir)
           sf::Vertex(sf::Vector2f(1300, 350), outlineColor),
           sf::Vertex(sf::Vector2f(1200, 250), outlineColor),
           sf::Vertex(sf::Vector2f(1300, 250), outlineColor),
+
+          //LUCK AND COURT RECT
+          sf::Vertex(sf::Vector2f(950, 200), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 400, 200), outlineColor),
+          sf::Vertex(sf::Vector2f(950, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 400, 350), outlineColor),
+          sf::Vertex(sf::Vector2f(400, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 950, 550), outlineColor),
+          sf::Vertex(sf::Vector2f(400, 700), outlineColor),
+          sf::Vertex(sf::Vector2f(BOARD_WIDTH - 950, 700), outlineColor),
+
+
         };
-        window.draw(line, 30, sf::Lines);
+        window.draw(line, 50, sf::Lines);
     }
 }
 
@@ -308,7 +327,7 @@ void GUI::loadDiceSides()
 void GUI::drawRollDice()
 {
     // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 35)
+    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 20)
     {
        int  dicePicNumber = rand() % 6;
         diceRect.setTexture(&diceTexture[dicePicNumber]);
@@ -318,5 +337,22 @@ void GUI::drawRollDice()
    //draw the new side
    window.draw(diceRect);
 
-    if (numberOfRolling <= 100) numberOfRolling++;
+   if (numberOfRolling <= 100) numberOfRolling++;
+}
+
+    //function to draw rectangles
+void GUI::drawrect()
+{
+    //change the size in GUI.h first to increase the number of rectangles
+   /* rectangle[0].setSize(sf::Vector2f(200, 200));
+    rectangle[0].setFillColor(outlineColor);
+    rectangle[0].setOutlineThickness(outlineThickness);
+    rectangle[0].setPosition(300, 400);
+
+    rectangle[1].setSize(sf::Vector2f(200, 200));
+    rectangle[1].setFillColor(sf::Color::Black);
+    rectangle[1].setOutlineThickness(outlineThickness);
+    rectangle[1].setPosition(600, 400);
+    window.draw(rectangle[0]);
+    window.draw(rectangle[1]);*/
 }

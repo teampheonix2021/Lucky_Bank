@@ -15,6 +15,12 @@ private:
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
     
+    //Blending mode, mix between the image and the rectangle
+    sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
+    sf::BlendMode alphaBlending = sf::BlendAlpha;
+    sf::BlendMode additiveBlending = sf::BlendAdd;
+
+
     const sf::Color  // Colors used for drawing (can change the whole theme of the game)
         backgroundColor = sf::Color::White,
         outlineColor = sf::Color:: Black,
@@ -22,9 +28,9 @@ private:
         Red = sf::Color::Red,
         flipperFillColor = sf::Color::White;
     const float outlineThickness = -1.0f;  // Negative sign means inwards
-
-
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton; // Rectangle edges of the board components
+    // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
+    int size = 2;
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton, *rectangle = new sf::RectangleShape[size]; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -45,4 +51,6 @@ public:
     void drawEdge(float position, bool EdgeDir);// Draws boarders of the spaces, The positions can be read from a file
     void loadDiceSides();//load dice side in textures
     void drawRollDice();// rolling the dice
+
+    void drawrect();
 };

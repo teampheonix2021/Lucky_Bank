@@ -9,6 +9,7 @@ using namespace std::chrono;
 #include "BoardObjects/Dice.h"
 #include "BoardObjects/Edge.h"
 #include "BoardObjects/MessageBox.h"
+#include "BoardObjects/Rectangle.h"
 
 // Represents a game, keeps track of everything relevant to the game and delegates the tasks to their proper objects
 class Game
@@ -21,6 +22,7 @@ private:
     Dice dice;
     Menu menu;
     Text text;
+    rectangle rect; //draw a rectangle
     bool exit;  // Flags about the user's exit keygame controls
     
 

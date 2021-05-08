@@ -25,6 +25,9 @@
     <ClCompile Include="BoardObjects\Text.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Drawable.h">
@@ -52,6 +55,9 @@
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
     <ClInclude Include="BoardObjects\Text.h">
+      <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
   </ItemGroup>
