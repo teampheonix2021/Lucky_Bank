@@ -15,7 +15,7 @@ private:
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
     
-    //Blending mode, mix between the image and the rectangle
+    //Blending mode, mix between the image and the rectangle-credits to ENG KAREEEEEEEEEEEEEEEEEEEEEEEM*******
     sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
     sf::BlendMode alphaBlending = sf::BlendAlpha;
     sf::BlendMode additiveBlending = sf::BlendAdd;
@@ -29,8 +29,8 @@ private:
         flipperFillColor = sf::Color::White;
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
-    int size = 2;
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton, *rectangle = new sf::RectangleShape[size]; // Rectangle edges of the board components
+
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton, rectangle [4]; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
