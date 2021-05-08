@@ -120,45 +120,34 @@ void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY
     sprite.setPosition(sf::Vector2f(setPositionX, setPositionY)); // offset relative to the original position(0,0)
     sprite.scale(sf::Vector2f(scaleX, scaleY)); // factor relative to the current scale
     // Create play Edge
+
     playRect.setSize(sf::Vector2f(65.0f, 65.0f));
     playRect.setOutlineThickness(outlineThickness);
     playRect.setOutlineColor(outlineColor);
-    playRect.setPosition(43, 94);
-    
-    rectangle[0].setSize(sf::Vector2f(65.0f, 65.0f));
-    rectangle[0].setOutlineThickness(outlineThickness);
-    rectangle[0].setOutlineColor(outlineColor);
-    rectangle[0].setPosition(43, 194);
+    playRect.setPosition(54, 50);
 
     window.draw(playRect,multiplicativeBlending);
-    window.draw(rectangle[0], multiplicativeBlending);
+
     rectangle[0].setSize(sf::Vector2f(65.0f, 65.0f));
     rectangle[0].setOutlineThickness(outlineThickness);
     rectangle[0].setOutlineColor(outlineColor);
-    rectangle[0].setPosition(54, 50);
+    rectangle[0].setPosition(54, 150);
 
-    window.draw(rectangle[0],multiplicativeBlending);
+    window.draw(rectangle[0], multiplicativeBlending);
 
     rectangle[1].setSize(sf::Vector2f(65.0f, 65.0f));
     rectangle[1].setOutlineThickness(outlineThickness);
     rectangle[1].setOutlineColor(outlineColor);
-    rectangle[1].setPosition(54, 150);
+    rectangle[1].setPosition(54, 250);
 
     window.draw(rectangle[1], multiplicativeBlending);
 
     rectangle[2].setSize(sf::Vector2f(65.0f, 65.0f));
     rectangle[2].setOutlineThickness(outlineThickness);
     rectangle[2].setOutlineColor(outlineColor);
-    rectangle[2].setPosition(54, 250);
+    rectangle[2].setPosition(54, 350);
 
     window.draw(rectangle[2], multiplicativeBlending);
-
-    rectangle[3].setSize(sf::Vector2f(65.0f, 65.0f));
-    rectangle[3].setOutlineThickness(outlineThickness);
-    rectangle[3].setOutlineColor(outlineColor);
-    rectangle[3].setPosition(54, 350);
-
-    window.draw(rectangle[3], multiplicativeBlending);
     window.draw(sprite);
 }
 

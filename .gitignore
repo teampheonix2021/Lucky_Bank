@@ -5,3 +5,9 @@
 /.vs/LuckBankSim/v16/ipch/AutoPCH/c7e6ae9186072f97
 /.vs/LuckBankSim/v16/ipch/AutoPCH
 *.opendb
+*.vs
+*Debug
+*/LuckBankSim/Debug
+*/LuckBankSim/x64
+
+
