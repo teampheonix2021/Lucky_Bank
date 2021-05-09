@@ -31,6 +31,21 @@
     <ClCompile Include="BoardObjects\TextBox.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
+    <ClCompile Include="City.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Parking.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="RestArea.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="space.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Market.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Drawable.h">
@@ -65,6 +80,21 @@
     </ClInclude>
     <ClInclude Include="BoardObjects\TextBox.h">
       <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="space.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="City.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Parking.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="RestArea.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Market.h">
+      <Filter>Header Files\spaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +135,12 @@
     </Filter>
     <Filter Include="Fonts">
       <UniqueIdentifier>{a01d27ba-9721-4c4f-aec4-92f36616bc30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\spaces">
+      <UniqueIdentifier>{433f959e-11d1-4189-909c-d22732b14dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Spaces">
+      <UniqueIdentifier>{e4cef8bd-3963-4ffc-9b68-4b488b2df053}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

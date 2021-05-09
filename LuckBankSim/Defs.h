@@ -13,3 +13,9 @@ using namespace std;
 /////////////////////newdice/////////////////////
 #define DICEX  50.0f////width of the dice
 #define DICEY  50.0f////height of the dice
+
+
+struct Group
+{
+	int Group;
+};
