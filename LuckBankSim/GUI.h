@@ -13,6 +13,7 @@ class GUI
 {
 private:
     int textbox = 0;
+    sf::Vector2f mouseposition; //mousepositon for textbox function .. etc
 
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
@@ -21,18 +22,19 @@ private:
     sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
     sf::BlendMode alphaBlending = sf::BlendAlpha;
     sf::BlendMode additiveBlending = sf::BlendAdd;
-
+    sf::BlendMode noBlending = sf::BlendNone;
 
     const sf::Color  // Colors used for drawing (can change the whole theme of the game)
         backgroundColor = sf::Color::White,
-        outlineColor = sf::Color:: Black,
+        outlineColor = sf::Color::Black,
         ballFillColor = sf::Color::White,
         Red = sf::Color::Red,
-        flipperFillColor = sf::Color::White;
+        flipperFillColor = sf::Color::White,
+        windowcolor = sf::Color::Color(255, 245, 199);
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
 
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4]; // Rectangle edges of the board components
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4], rectangleleft[8], rectangleright[8], rectangleup[9],rectangledown[9],Luckrectangle,Courtrectangle; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -55,7 +57,10 @@ public:
     void drawRollDice();// rolling the dice
 
     void drawrect(); //draw rectangle as you want
-    void loadtextbox(string textbox); //display the text box
+    void loadtextbox(string textbox, sf::Vector2f); //display the text box
     void drawtextbox();
     void settextbox(int x);
+    void setmousepos(sf::Vector2f);
 };
+
+//https://www.rapidtables.com/web/color/RGB_Color.html to generate the color we want by using sf::Color::Color(red value ,green value , blue value);
