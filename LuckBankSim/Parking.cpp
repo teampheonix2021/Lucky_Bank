@@ -1,5 +1,8 @@
 #include "Parking.h"
 
+
+Parking::Parking() {};
+
 void Parking::setGaragePrice(int a)
 {
     GaragePrice = a;

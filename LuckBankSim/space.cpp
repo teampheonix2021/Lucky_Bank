@@ -5,4 +5,4 @@ Space::Space()
 	spacesCount ++;
 }
 
-
+int Space::spacesCount = 0;

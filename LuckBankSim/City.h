@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 #include "space.h"
 #include <string>
 #include "Defs.h"
@@ -8,8 +9,7 @@
 
 using namespace std;
 
-class City :
-    public Space
+class City : public Space
 {
 private:
    string Name;
@@ -20,6 +20,11 @@ private:
    RestArea R;
    Market M;
 public:
+    City();
     void setGroup(int a);
+    void setPrice(int);
+    void setFees(int);
+    int getPrice();
+    int getFees();
 };
 
