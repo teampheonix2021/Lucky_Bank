@@ -22,9 +22,6 @@ private:
 public:
     City();
     void setGroup(int a);
-    void setPrice(int);
-    void setFees(int);
-    int getPrice();
-    int getFees();
+    void Readcities();
 };
 
