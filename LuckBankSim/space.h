@@ -2,11 +2,10 @@
 class Space
 {
 private:
-	 
-
+	static int spacesCount;
+	
 public:
 	Space();
-	virtual  int getNumSpaces() = 0;
-	 int spacesCount;
+	virtual void Readcities() = 0;
 };
 

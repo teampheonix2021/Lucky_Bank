@@ -20,6 +20,8 @@ private:
    RestArea R;
    Market M;
 public:
+    City();
     void setGroup(int a);
+    void Readcities();
 };
 
