@@ -992,7 +992,7 @@ void GUI::citydata(string name, int price, int passingfees, int Garageprice, int
     //sf::String marketfees;
 }
 
-
+//drawing cities on board
 void GUI::DrawCity()
 {
     for (int i = 0,name = 0; name < C.Name.size(); i++,name++)
