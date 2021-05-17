@@ -183,6 +183,8 @@ void GUI::display()
 {
     window.display();
 }
+
+
 //This function can be changes to load arrays of images  according to the game components
 void GUI::loadPlayImage(std::string path, float setPositionX, float setPositionY, float scaleX,float scaleY)
 {
@@ -992,7 +994,7 @@ void GUI::citydata(string name, int price, int passingfees, int Garageprice, int
     //sf::String marketfees;
 }
 
-//drawing cities on board
+//drawing cities on board with Auto Functions
 void GUI::DrawCity()
 {
     for (int i = 0,name = 0; name < C.Name.size(); i++,name++)
