@@ -13,13 +13,11 @@ void City::setGroup(int a)
 		G.Group = a;
 }
 
-//SpaceInfo
-void City::Readcities()
+//spaceinfo
+ City City::Readcities(City & C)
 {
-	int counter = 0;
-	City *C= new City[counter];
 	fstream infile;
-	infile.open("BankOfLuckFiles\\spaceinfo.txt");
+	infile.open("bankofluckfiles\\spaceinfo.txt");
 	if (!infile)
 	{
 		cout << "open file failure" << endl;
@@ -30,44 +28,74 @@ void City::Readcities()
 		char* context = nullptr;
 		const int size = 300;
 		char line[size];
+		string Y_1 = "ClubOfLuck";
+		string Y_2 = "GasStation";
 		
+		//while (infile.getline(line, size))
+		//{
+		//	//parse the line
+		//	
+		//	
+		//		pch = strtok_s(line, ",", &context);
+		//		while (pch != nullptr)
+		//		{
+		//			pch = strtok_s(NULL, ",", &context);
+		//		}
+		//		counter++;
+		//	
+		//}
 
 		while (infile.getline(line, size))
 		{
 			//parse the line
-			for (int i = 0; i <= counter && i < 23; ++i)
-			{
+			
+			
 				pch = strtok_s(line, ",", &context);
 				while (pch != nullptr)
 				{
-					C[i].Name = pch;//push the name
+					if (pch == Y_1)// skip the club of luck
+					{
+						pch = strtok_s(nullptr, ",", &context);
+						pch = strtok_s(nullptr, ",", &context);
+						break;
+					}
+
+					if (pch == Y_1)// skip the gas station
+					{
+						pch = strtok_s(nullptr, ",", &context);
+						pch = strtok_s(nullptr, ",", &context);
+						pch = strtok_s(nullptr, ",", &context);
+						break;
+					}
+
+					Name.push_back(pch);//push the name
 					pch = strtok_s(nullptr, ",", &context);
 					//stringstream temp(pch);
-					//temp >> C[i].Price;
-					C[i].Price = atoi(pch);
+					//temp >> c[i].price;
+					Price.push_back(atoi(pch));//push the price
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].PassingFees = atoi(pch);
+					PassingFees.push_back(atoi(pch));//push the
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].P.setGaragePrice(atoi(pch));
+					P.GaragePrice.push_back(atoi(pch));//push the garage price
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].P.setGarageFees(atoi(pch));
+					P.GarageFees.push_back(atoi(pch));//push the garage fees
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].R.setRestAreaPrice(atoi(pch));
+					R.RestAreaPrice.push_back(atoi(pch));//push the rest area price
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].R.setRestAreaFees(atoi(pch));
+					R.RestAreaFees.push_back(atoi(pch));//push the rest area fees
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].M.setMarketPrice(atoi(pch));
+					M.MarketPrice.push_back(atoi(pch));//push the market price
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].M.setMarketFees(atoi(pch));
+					M.MarketFees.push_back(atoi(pch));//push the market fees
 					pch = strtok_s(nullptr, ",", &context);
-					C[i].G.Group = atoi(pch);
+					G.Group = atoi(pch); // push the group
 					pch = strtok_s(nullptr, ",", &context);
 				}
-				counter++;
-			}
+			
+			
 		}
 		infile.close();
 
 	}
-
+	return C;
 }

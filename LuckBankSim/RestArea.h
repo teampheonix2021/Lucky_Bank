@@ -1,14 +1,18 @@
 #pragma once
+#include <vector>
+using namespace std;
 class RestArea
 {
 private:
-	int RestAreaPrice;
-	int RestAreaFees;
+	//int RestAreaPrice;
+	//int RestAreaFees;
 public:
-	void setRestAreaPrice(int a);
+	/*void setRestAreaPrice(int a);
 	int getRestAreaPrice();
 	void setRestAreaFees(int a);
-	int getRestAreaFees();
+	int getRestAreaFees();*/
+	vector <int> RestAreaPrice;
+	vector <int> RestAreaFees;
 
 };
 

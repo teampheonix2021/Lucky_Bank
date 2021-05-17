@@ -5,16 +5,16 @@
 #include"Parking.h"
 #include"RestArea.h"
 #include"Market.h"
-
+#include <vector>
 using namespace std;
 
 class City :
     public Space
 {
-private:
-   string Name;
-   int Price;
-   int PassingFees;
+protected:
+   //string Name;
+   //int Price;
+   //int PassingFees;
    Group G;
    Parking P;
    RestArea R;
@@ -22,6 +22,9 @@ private:
 public:
     City();
     void setGroup(int a);
-    void Readcities();
+    City Readcities(City & C);
+    vector<string> Name;
+    vector<int> Price;
+    vector<int> PassingFees;
 };
 
