@@ -52,6 +52,12 @@
     <ClCompile Include="BoardObjects\PlayerData.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
+    <ClCompile Include="GasStation.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="ClubOfLuck.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Drawable.h">
@@ -107,6 +113,12 @@
     </ClInclude>
     <ClInclude Include="BoardObjects\PlayerData.h">
       <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GasStation.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ClubOfLuck.h">
+      <Filter>Header Files\spaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

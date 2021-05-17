@@ -147,9 +147,11 @@
     <ClInclude Include="BoardObjects\Rectangle.h" />
     <ClInclude Include="BoardObjects\Text.h" />
     <ClInclude Include="BoardObjects\TextBox.h" />
+    <ClInclude Include="ClubOfLuck.h" />
     <ClInclude Include="Defs.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BoardObjects\Drawable.h" />
+    <ClInclude Include="GasStation.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="spaces\City.h" />
     <ClInclude Include="spaces\Market.h" />
@@ -165,9 +167,11 @@
     <ClCompile Include="BoardObjects\Rectangle.cpp" />
     <ClCompile Include="BoardObjects\Text.cpp" />
     <ClCompile Include="BoardObjects\TextBox.cpp" />
+    <ClCompile Include="ClubOfLuck.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BoardObjects\Edge.cpp" />
     <ClCompile Include="BoardObjects\MessageBox.cpp" />
+    <ClCompile Include="GasStation.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="spaces\City.cpp" />

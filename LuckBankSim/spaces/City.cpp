@@ -6,13 +6,9 @@ using namespace std;
 
 City::City()
 {
-	G.Group = 0;
+	
 }
 
-void City::setGroup(int a)
-{
-	G.Group = a;
-}
 
 
 City City::Readcities(City & C)
@@ -73,7 +69,7 @@ City City::Readcities(City & C)
 					pch = strtok_s(nullptr, ",", &context);
 					M.MarketFees.push_back(atoi(pch));//push the market fees
 					pch = strtok_s(nullptr, ",", &context);
-					G.Group = atoi(pch); // push the group
+					G.Group1.push_back(atoi(pch)); // push the group
 					pch = strtok_s(nullptr, ",", &context);
 				}
 		}
