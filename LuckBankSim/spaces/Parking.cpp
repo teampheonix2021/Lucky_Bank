@@ -1,24 +1,21 @@
 #include "Parking.h"
-
-
-Parking::Parking() {};
-
-void Parking::setGaragePrice(int a)
-{
-    GaragePrice = a;
-}
-
-int Parking::getGaragePrice()
-{
-    return this->GaragePrice;
-}
-
-void Parking::setGarageFees(int a)
-{
-    GarageFees = 1;
-}
-
-int Parking::getGarageFees()
-{
-    return this->GarageFees;
-}
+//
+//void Parking::setGaragePrice(int a)
+//{
+//    GaragePrice = a;
+//}
+//
+//int Parking::getGaragePrice()
+//{
+//    return this->GaragePrice;
+//}
+//
+//void Parking::setGarageFees(int a)
+//{
+//    GarageFees = 1;
+//}
+//
+//int Parking::getGarageFees()
+//{
+//    return this->GarageFees;
+//}

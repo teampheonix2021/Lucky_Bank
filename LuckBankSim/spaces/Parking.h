@@ -1,14 +1,17 @@
 #pragma once
+#include <vector>
+using namespace std;
 class Parking
 {
 private:
-	int GaragePrice;
-	int GarageFees;
+	//int GaragePrice;
+	//int GarageFees;
 public:
-	explicit Parking();
-	void setGaragePrice(int a);
+	/*void setGaragePrice(int a);
 	int getGaragePrice();
 	void setGarageFees(int a);
-	int getGarageFees();
+	int getGarageFees();*/
+	vector <int> GaragePrice;
+	vector <int> GarageFees;
 };
 
