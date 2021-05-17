@@ -81,3 +81,34 @@ City City::Readcities(City & C)
 	}
 	return C;
 }
+
+int City::getparkprice(int index)
+{
+	return P.GaragePrice[index];
+}
+
+int City::getparkfees(int index)
+{
+	return P.GarageFees[index];
+}
+
+int City::getrestprice(int index)
+{
+	return R.RestAreaPrice[index];
+}
+
+int City::getrestfees(int index)
+{
+	return R.RestAreaFees[index];
+}
+
+int City::getmarketprice(int index)
+{
+	return M.MarketPrice[index];
+}
+
+int City::getmarketfees(int index)
+{
+	return M.MarketFees[index];
+}
+

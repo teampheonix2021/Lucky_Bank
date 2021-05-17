@@ -27,7 +27,17 @@ void GUI::getControls(bool& exit)
     //check the window events
     while (window.pollEvent(event)) 
     {
-        // text box near the mouse icon
+        if (event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+        {
+            sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            sf::FloatRect Jerusalem = Board[1].getGlobalBounds();
+            if (Jerusalem.contains(mousePos) && messagePrompt.isOpen() == false && playbuttonbool == true)
+            {
+                textbox = 8;
+            }
+        }
+
+        // text box near the mouse icon, Touch with cursor to display !
         if (event.TouchEnded)
         {
             sf::Vector2f mousePos2 = window.mapPixelToCoords(sf::Mouse::getPosition(window));
@@ -38,7 +48,7 @@ void GUI::getControls(bool& exit)
             sf::FloatRect player2 = Player[2].getGlobalBounds();
             sf::FloatRect player3 = Player[1].getGlobalBounds();
             sf::FloatRect player4 = Player[0].getGlobalBounds();
-            sf::FloatRect Jerusalem = rectangleleft[1].getGlobalBounds();
+
             if (diceBtnBounds2.contains(mousePos2))
             {
                 textbox = 1;
@@ -98,10 +108,6 @@ void GUI::getControls(bool& exit)
                 {
                     textbox = 7;
                 }
-            }
-            else if (Jerusalem.contains(mousePos2) && messagePrompt.isOpen() == false && playbuttonbool == true)
-            {
-                textbox = 8;
             }
             else
             {
@@ -268,7 +274,7 @@ void GUI::drawText()
     {
         loadText("Please click here to roll the dice", 628.0f, 470.0f);
     }
-    loadText("TEST", 240, 500);
+    //loadText("TEST", 240, 500);
 }
 
 //this function is invoked from messagebox object to popup the message box
@@ -572,218 +578,220 @@ void GUI::drawrect()
     //Drawing Rectangles of the board
 
     //Rectangles of the left side of the board .... starts from the left down side
-    rectangleleft[0].setSize(sf::Vector2f(100, 100));
-    rectangleleft[0].setOutlineColor(outlineColor);
-    rectangleleft[0].setOutlineThickness(outlineThickness);
-    rectangleleft[0].setPosition(200, 750);
+    Board[0].setSize(sf::Vector2f(100, 100));
+    Board[0].setOutlineColor(outlineColor);
+    Board[0].setOutlineThickness(outlineThickness);
+    Board[0].setPosition(200, 750);
 
-    rectangleleft[1].setSize(sf::Vector2f(100, 100));
-    rectangleleft[1].setOutlineColor(outlineColor);
-    rectangleleft[1].setOutlineThickness(outlineThickness);
-    rectangleleft[1].setPosition(200, 650);
+    Board[1].setSize(sf::Vector2f(100, 100));
+    Board[1].setOutlineColor(outlineColor);
+    Board[1].setOutlineThickness(outlineThickness);
+    Board[1].setPosition(200, 650);
 
-    rectangleleft[2].setSize(sf::Vector2f(100, 100));
-    rectangleleft[2].setOutlineColor(outlineColor);
-    rectangleleft[2].setOutlineThickness(outlineThickness);
-    rectangleleft[2].setPosition(200, 550);
+    Board[2].setSize(sf::Vector2f(100, 100));
+    Board[2].setOutlineColor(outlineColor);
+    Board[2].setOutlineThickness(outlineThickness);
+    Board[2].setPosition(200, 550);
 
-    rectangleleft[3].setSize(sf::Vector2f(100, 100));
-    rectangleleft[3].setOutlineColor(outlineColor);
-    rectangleleft[3].setOutlineThickness(outlineThickness);
-    rectangleleft[3].setPosition(200, 450);
+    Board[3].setSize(sf::Vector2f(100, 100));
+    Board[3].setOutlineColor(outlineColor);
+    Board[3].setOutlineThickness(outlineThickness);
+    Board[3].setPosition(200, 450);
 
-    rectangleleft[4].setSize(sf::Vector2f(100, 100));
-    rectangleleft[4].setOutlineColor(outlineColor);
-    rectangleleft[4].setOutlineThickness(outlineThickness);
-    rectangleleft[4].setPosition(200, 350);
+    Board[4].setSize(sf::Vector2f(100, 100));
+    Board[4].setOutlineColor(outlineColor);
+    Board[4].setOutlineThickness(outlineThickness);
+    Board[4].setPosition(200, 350);
 
-    rectangleleft[5].setSize(sf::Vector2f(100, 100));
-    rectangleleft[5].setOutlineColor(outlineColor);
-    rectangleleft[5].setOutlineThickness(outlineThickness);
-    rectangleleft[5].setPosition(200, 250);
+    Board[5].setSize(sf::Vector2f(100, 100));
+    Board[5].setOutlineColor(outlineColor);
+    Board[5].setOutlineThickness(outlineThickness);
+    Board[5].setPosition(200, 250);
 
-    rectangleleft[6].setSize(sf::Vector2f(100, 100));
-    rectangleleft[6].setOutlineColor(outlineColor);
-    rectangleleft[6].setOutlineThickness(outlineThickness);
-    rectangleleft[6].setPosition(200, 150);
+    Board[6].setSize(sf::Vector2f(100, 100));
+    Board[6].setOutlineColor(outlineColor);
+    Board[6].setOutlineThickness(outlineThickness);
+    Board[6].setPosition(200, 150);
 
-    rectangleleft[7].setSize(sf::Vector2f(100, 100));
-    rectangleleft[7].setOutlineColor(outlineColor);
-    rectangleleft[7].setOutlineThickness(outlineThickness);
-    rectangleleft[7].setPosition(200, 50);
-    window.draw(rectangleleft[0],multiplicativeBlending);
-    window.draw(rectangleleft[1], multiplicativeBlending);
-    window.draw(rectangleleft[2], multiplicativeBlending);
-    window.draw(rectangleleft[3], multiplicativeBlending);
-    window.draw(rectangleleft[4], multiplicativeBlending);
-    window.draw(rectangleleft[5], multiplicativeBlending);
-    window.draw(rectangleleft[6], multiplicativeBlending);
-    window.draw(rectangleleft[7], multiplicativeBlending);
+    Board[7].setSize(sf::Vector2f(100, 100));
+    Board[7].setOutlineColor(outlineColor);
+    Board[7].setOutlineThickness(outlineThickness);
+    Board[7].setPosition(200, 50);
+
+
+    window.draw(Board[0],multiplicativeBlending);
+    window.draw(Board[1], multiplicativeBlending);
+    window.draw(Board[2], multiplicativeBlending);
+    window.draw(Board[3], multiplicativeBlending);
+    window.draw(Board[4], multiplicativeBlending);
+    window.draw(Board[5], multiplicativeBlending);
+    window.draw(Board[6], multiplicativeBlending);
+    window.draw(Board[7], multiplicativeBlending);
 
 
     //Rectangles of the Right side of the board .... starts from down
-    rectangleright[7].setSize(sf::Vector2f(100, 100));
-    rectangleright[7].setOutlineColor(outlineColor);
-    rectangleright[7].setOutlineThickness(outlineThickness);
-    rectangleright[7].setPosition(1200, 750);
+    Board[24].setSize(sf::Vector2f(100, 100));
+    Board[24].setOutlineColor(outlineColor);
+    Board[24].setOutlineThickness(outlineThickness);
+    Board[24].setPosition(1200, 750);
 
-    rectangleright[6].setSize(sf::Vector2f(100, 100));
-    rectangleright[6].setOutlineColor(outlineColor);
-    rectangleright[6].setOutlineThickness(outlineThickness);
-    rectangleright[6].setPosition(1200, 650);
+    Board[23].setSize(sf::Vector2f(100, 100));
+    Board[23].setOutlineColor(outlineColor);
+    Board[23].setOutlineThickness(outlineThickness);
+    Board[23].setPosition(1200, 650);
 
-    rectangleright[5].setSize(sf::Vector2f(100, 100));
-    rectangleright[5].setOutlineColor(outlineColor);
-    rectangleright[5].setOutlineThickness(outlineThickness);
-    rectangleright[5].setPosition(1200, 550);
+    Board[22].setSize(sf::Vector2f(100, 100));
+    Board[22].setOutlineColor(outlineColor);
+    Board[22].setOutlineThickness(outlineThickness);
+    Board[22].setPosition(1200, 550);
 
-    rectangleright[4].setSize(sf::Vector2f(100, 100));
-    rectangleright[4].setOutlineColor(outlineColor);
-    rectangleright[4].setOutlineThickness(outlineThickness);
-    rectangleright[4].setPosition(1200, 450);
+    Board[21].setSize(sf::Vector2f(100, 100));
+    Board[21].setOutlineColor(outlineColor);
+    Board[21].setOutlineThickness(outlineThickness);
+    Board[21].setPosition(1200, 450);
 
-    rectangleright[3].setSize(sf::Vector2f(100, 100));
-    rectangleright[3].setOutlineColor(outlineColor);
-    rectangleright[3].setOutlineThickness(outlineThickness);
-    rectangleright[3].setPosition(1200, 350);
+    Board[20].setSize(sf::Vector2f(100, 100));
+    Board[20].setOutlineColor(outlineColor);
+    Board[20].setOutlineThickness(outlineThickness);
+    Board[20].setPosition(1200, 350);
 
-    rectangleright[2].setSize(sf::Vector2f(100, 100));
-    rectangleright[2].setOutlineColor(outlineColor);
-    rectangleright[2].setOutlineThickness(outlineThickness);
-    rectangleright[2].setPosition(1200, 250);
+    Board[19].setSize(sf::Vector2f(100, 100));
+    Board[19].setOutlineColor(outlineColor);
+    Board[19].setOutlineThickness(outlineThickness);
+    Board[19].setPosition(1200, 250);
 
-    rectangleright[1].setSize(sf::Vector2f(100, 100));
-    rectangleright[1].setOutlineColor(outlineColor);
-    rectangleright[1].setOutlineThickness(outlineThickness);
-    rectangleright[1].setPosition(1200, 150);
+    Board[18].setSize(sf::Vector2f(100, 100));
+    Board[18].setOutlineColor(outlineColor);
+    Board[18].setOutlineThickness(outlineThickness);
+    Board[18].setPosition(1200, 150);
 
-    rectangleright[0].setSize(sf::Vector2f(100, 100));
-    rectangleright[0].setOutlineColor(outlineColor);
-    rectangleright[0].setOutlineThickness(outlineThickness);
-    rectangleright[0].setPosition(1200, 50);
+    Board[17].setSize(sf::Vector2f(100, 100));
+    Board[17].setOutlineColor(outlineColor);
+    Board[17].setOutlineThickness(outlineThickness);
+    Board[17].setPosition(1200, 50);
 
-    window.draw(rectangleright[0], multiplicativeBlending);
-    window.draw(rectangleright[1], multiplicativeBlending);
-    window.draw(rectangleright[2], multiplicativeBlending);
-    window.draw(rectangleright[3], multiplicativeBlending);
-    window.draw(rectangleright[4], multiplicativeBlending);
-    window.draw(rectangleright[5], multiplicativeBlending);
-    window.draw(rectangleright[6], multiplicativeBlending);
-    window.draw(rectangleright[7], multiplicativeBlending);
+    window.draw(Board[17], multiplicativeBlending);
+    window.draw(Board[18], multiplicativeBlending);
+    window.draw(Board[19], multiplicativeBlending);
+    window.draw(Board[20], multiplicativeBlending);
+    window.draw(Board[21], multiplicativeBlending);
+    window.draw(Board[22], multiplicativeBlending);
+    window.draw(Board[23], multiplicativeBlending);
+    window.draw(Board[24], multiplicativeBlending);
 
 
     //Rectangles for the upper side of the board .. starts from the left side
-    rectangleup[0].setSize(sf::Vector2f(100, 100));
-    rectangleup[0].setOutlineColor(outlineColor);
-    rectangleup[0].setOutlineThickness(outlineThickness);
-    rectangleup[0].setPosition(300, 50);
+    Board[8].setSize(sf::Vector2f(100, 100));
+    Board[8].setOutlineColor(outlineColor);
+    Board[8].setOutlineThickness(outlineThickness);
+    Board[8].setPosition(300, 50);
 
-    rectangleup[1].setSize(sf::Vector2f(100, 100));
-    rectangleup[1].setOutlineColor(outlineColor);
-    rectangleup[1].setOutlineThickness(outlineThickness);
-    rectangleup[1].setPosition(400, 50);
+    Board[9].setSize(sf::Vector2f(100, 100));
+    Board[9].setOutlineColor(outlineColor);
+    Board[9].setOutlineThickness(outlineThickness);
+    Board[9].setPosition(400, 50);
 
-    rectangleup[2].setSize(sf::Vector2f(100, 100));
-    rectangleup[2].setOutlineColor(outlineColor);
-    rectangleup[2].setOutlineThickness(outlineThickness);
-    rectangleup[2].setPosition(500, 50);
+    Board[10].setSize(sf::Vector2f(100, 100));
+    Board[10].setOutlineColor(outlineColor);
+    Board[10].setOutlineThickness(outlineThickness);
+    Board[10].setPosition(500, 50);
 
-    rectangleup[3].setSize(sf::Vector2f(100, 100));
-    rectangleup[3].setOutlineColor(outlineColor);
-    rectangleup[3].setOutlineThickness(outlineThickness);
-    rectangleup[3].setPosition(600, 50);
+    Board[11].setSize(sf::Vector2f(100, 100));
+    Board[11].setOutlineColor(outlineColor);
+    Board[11].setOutlineThickness(outlineThickness);
+    Board[11].setPosition(600, 50);
 
-    rectangleup[4].setSize(sf::Vector2f(100, 100));
-    rectangleup[4].setOutlineColor(outlineColor);
-    rectangleup[4].setOutlineThickness(outlineThickness);
-    rectangleup[4].setPosition(700, 50);
+    Board[12].setSize(sf::Vector2f(100, 100));
+    Board[12].setOutlineColor(outlineColor);
+    Board[12].setOutlineThickness(outlineThickness);
+    Board[12].setPosition(700, 50);
 
-    rectangleup[5].setSize(sf::Vector2f(100, 100));
-    rectangleup[5].setOutlineColor(outlineColor);
-    rectangleup[5].setOutlineThickness(outlineThickness);
-    rectangleup[5].setPosition(800, 50);
+    Board[13].setSize(sf::Vector2f(100, 100));
+    Board[13].setOutlineColor(outlineColor);
+    Board[13].setOutlineThickness(outlineThickness);
+    Board[13].setPosition(800, 50);
 
-    rectangleup[6].setSize(sf::Vector2f(100, 100));
-    rectangleup[6].setOutlineColor(outlineColor);
-    rectangleup[6].setOutlineThickness(outlineThickness);
-    rectangleup[6].setPosition(900, 50);
+    Board[14].setSize(sf::Vector2f(100, 100));
+    Board[14].setOutlineColor(outlineColor);
+    Board[14].setOutlineThickness(outlineThickness);
+    Board[14].setPosition(900, 50);
 
-    rectangleup[7].setSize(sf::Vector2f(100, 100));
-    rectangleup[7].setOutlineColor(outlineColor);
-    rectangleup[7].setOutlineThickness(outlineThickness);
-    rectangleup[7].setPosition(1000, 50);
+    Board[15].setSize(sf::Vector2f(100, 100));
+    Board[15].setOutlineColor(outlineColor);
+    Board[15].setOutlineThickness(outlineThickness);
+    Board[15].setPosition(1000, 50);
 
-    rectangleup[8].setSize(sf::Vector2f(100, 100));
-    rectangleup[8].setOutlineColor(outlineColor);
-    rectangleup[8].setOutlineThickness(outlineThickness);
-    rectangleup[8].setPosition(1100, 50);
+    Board[16].setSize(sf::Vector2f(100, 100));
+    Board[16].setOutlineColor(outlineColor);
+    Board[16].setOutlineThickness(outlineThickness);
+    Board[16].setPosition(1100, 50);
 
-    window.draw(rectangleup[0], multiplicativeBlending);
-    window.draw(rectangleup[1], multiplicativeBlending);
-    window.draw(rectangleup[2], multiplicativeBlending);
-    window.draw(rectangleup[3], multiplicativeBlending);
-    window.draw(rectangleup[4], multiplicativeBlending);
-    window.draw(rectangleup[5], multiplicativeBlending);
-    window.draw(rectangleup[6], multiplicativeBlending);
-    window.draw(rectangleup[7], multiplicativeBlending);
-    window.draw(rectangleup[8], multiplicativeBlending);
+    window.draw(Board[8], multiplicativeBlending);
+    window.draw(Board[9], multiplicativeBlending);
+    window.draw(Board[10], multiplicativeBlending);
+    window.draw(Board[11], multiplicativeBlending);
+    window.draw(Board[12], multiplicativeBlending);
+    window.draw(Board[13], multiplicativeBlending);
+    window.draw(Board[14], multiplicativeBlending);
+    window.draw(Board[15], multiplicativeBlending);
+    window.draw(Board[16], multiplicativeBlending);
 
 
     //Rectangles for the down side of the board .... start from the right side
-    rectangledown[8].setSize(sf::Vector2f(100, 100));
-    rectangledown[8].setOutlineColor(outlineColor);
-    rectangledown[8].setOutlineThickness(outlineThickness);
-    rectangledown[8].setPosition(300, 750);
+    Board[33].setSize(sf::Vector2f(100, 100));
+    Board[33].setOutlineColor(outlineColor);
+    Board[33].setOutlineThickness(outlineThickness);
+    Board[33].setPosition(300, 750);
 
-    rectangledown[7].setSize(sf::Vector2f(100, 100));
-    rectangledown[7].setOutlineColor(outlineColor);
-    rectangledown[7].setOutlineThickness(outlineThickness);
-    rectangledown[7].setPosition(400, 750);
+    Board[32].setSize(sf::Vector2f(100, 100));
+    Board[32].setOutlineColor(outlineColor);
+    Board[32].setOutlineThickness(outlineThickness);
+    Board[32].setPosition(400, 750);
 
-    rectangledown[6].setSize(sf::Vector2f(100, 100));
-    rectangledown[6].setOutlineColor(outlineColor);
-    rectangledown[6].setOutlineThickness(outlineThickness);
-    rectangledown[6].setPosition(500, 750);
+    Board[31].setSize(sf::Vector2f(100, 100));
+    Board[31].setOutlineColor(outlineColor);
+    Board[31].setOutlineThickness(outlineThickness);
+    Board[31].setPosition(500, 750);
 
-    rectangledown[5].setSize(sf::Vector2f(100, 100));
-    rectangledown[5].setOutlineColor(outlineColor);
-    rectangledown[5].setOutlineThickness(outlineThickness);
-    rectangledown[5].setPosition(600, 750);
+    Board[30].setSize(sf::Vector2f(100, 100));
+    Board[30].setOutlineColor(outlineColor);
+    Board[30].setOutlineThickness(outlineThickness);
+    Board[30].setPosition(600, 750);
 
-    rectangledown[4].setSize(sf::Vector2f(100, 100));
-    rectangledown[4].setOutlineColor(outlineColor);
-    rectangledown[4].setOutlineThickness(outlineThickness);
-    rectangledown[4].setPosition(700, 750);
+    Board[29].setSize(sf::Vector2f(100, 100));
+    Board[29].setOutlineColor(outlineColor);
+    Board[29].setOutlineThickness(outlineThickness);
+    Board[29].setPosition(700, 750);
 
-    rectangledown[3].setSize(sf::Vector2f(100, 100));
-    rectangledown[3].setOutlineColor(outlineColor);
-    rectangledown[3].setOutlineThickness(outlineThickness);
-    rectangledown[3].setPosition(800, 750);
+    Board[28].setSize(sf::Vector2f(100, 100));
+    Board[28].setOutlineColor(outlineColor);
+    Board[28].setOutlineThickness(outlineThickness);
+    Board[28].setPosition(800, 750);
 
-    rectangledown[2].setSize(sf::Vector2f(100, 100));
-    rectangledown[2].setOutlineColor(outlineColor);
-    rectangledown[2].setOutlineThickness(outlineThickness);
-    rectangledown[2].setPosition(900, 750);
+    Board[27].setSize(sf::Vector2f(100, 100));
+    Board[27].setOutlineColor(outlineColor);
+    Board[27].setOutlineThickness(outlineThickness);
+    Board[27].setPosition(900, 750);
 
-    rectangledown[1].setSize(sf::Vector2f(100, 100));
-    rectangledown[1].setOutlineColor(outlineColor);
-    rectangledown[1].setOutlineThickness(outlineThickness);
-    rectangledown[1].setPosition(1000, 750);
+    Board[26].setSize(sf::Vector2f(100, 100));
+    Board[26].setOutlineColor(outlineColor);
+    Board[26].setOutlineThickness(outlineThickness);
+    Board[26].setPosition(1000, 750);
 
-    rectangledown[0].setSize(sf::Vector2f(100, 100));
-    rectangledown[0].setOutlineColor(outlineColor);
-    rectangledown[0].setOutlineThickness(outlineThickness);
-    rectangledown[0].setPosition(1100, 750);
+    Board[25].setSize(sf::Vector2f(100, 100));
+    Board[25].setOutlineColor(outlineColor);
+    Board[25].setOutlineThickness(outlineThickness);
+    Board[25].setPosition(1100, 750);
 
-    window.draw(rectangledown[0], multiplicativeBlending);
-    window.draw(rectangledown[1], multiplicativeBlending);
-    window.draw(rectangledown[2], multiplicativeBlending);
-    window.draw(rectangledown[3], multiplicativeBlending);
-    window.draw(rectangledown[4], multiplicativeBlending);
-    window.draw(rectangledown[5], multiplicativeBlending);
-    window.draw(rectangledown[6], multiplicativeBlending);
-    window.draw(rectangledown[7], multiplicativeBlending);
-    window.draw(rectangledown[8], multiplicativeBlending);
+    window.draw(Board[25], multiplicativeBlending);
+    window.draw(Board[26], multiplicativeBlending);
+    window.draw(Board[27], multiplicativeBlending);
+    window.draw(Board[28], multiplicativeBlending);
+    window.draw(Board[29], multiplicativeBlending);
+    window.draw(Board[30], multiplicativeBlending);
+    window.draw(Board[31], multiplicativeBlending);
+    window.draw(Board[32], multiplicativeBlending);
+    window.draw(Board[33], multiplicativeBlending);
 
     //Court Rectangle 
     Courtrectangle.setSize(sf::Vector2f(150, 150));
@@ -802,7 +810,7 @@ void GUI::drawrect()
     window.draw(Luckrectangle, multiplicativeBlending);
 }
 
-
+// text box Near the mouse Cursor
 void GUI::loadtextbox(string textbox, sf::Vector2f mousepos)
 {
     sf::Font font;
@@ -856,9 +864,9 @@ void GUI::drawtextbox()
 
     if (textbox == 8)
     {
-        if (messagePrompt.isOpen() == false)
+        if (messagePrompt.isOpen() == false && playbuttonbool == true)
         {
-            playerdata(C.Name[0]);
+            citydata(C.Name[0], C.Price[0], C.PassingFees[0], C.getparkprice(0), C.getparkfees(0), C.getrestprice(0), C.getrestfees(0), C.getmarketprice(0), C.getmarketfees(0),1);
         }
     }
 }
@@ -944,6 +952,7 @@ void GUI::player()
     }
 }
 
+// Rectangle to display the player and board info
 void GUI::playerdata(string x)
 {
     sf::Font font;
@@ -969,6 +978,131 @@ void GUI::playbutton(bool x)
     playbuttonbool = x;
 }
 
+
+void GUI::citydata(string name, int price, int passingfees, int Garageprice, int Garagefees, int restprice, int restfees, int marketprice, int marketfees, int index)
+{
+    sf::Font font;
+    //sf::String price;
+    //sf::String passingfees;
+    //sf::String Garageprice;
+    //sf::String Garagefees;
+    //sf::String restprice;
+    //sf::String restfees;
+    //sf::String marketprice;
+    //sf::String marketfees;
+}
+
+
+void GUI::DrawCity()
+{
+    for (int i = 0,name = 0; name < C.Name.size(); i++,name++)
+    {
+        sf::Text price;
+        sf::Font font;
+        sf::Text Ci;
+        if (i == 0 || i == 3 || i == 7 || i == 10 || i == 12 || i == 14 || i == 17 || i == 20 || i == 24 || i == 29 || i == 31)
+        {
+            i = i + 1;
+            font.loadFromFile(ARIAL_FONT);
+            Ci.setFont(font);
+            Ci.setString(C.Name[name]);
+            Ci.setCharacterSize(15);
+            Ci.setFillColor(outlineColor);
+            Ci.setStyle(sf::Text::Bold);
+            Ci.setPosition(Board[i].getPosition());
+
+            price.setFont(font);
+            price.setString(to_string(C.Price[name]));
+            price.setCharacterSize(15);
+            price.setFillColor(outlineColor);
+            price.setStyle(sf::Text::Bold);
+            price.setPosition(Board[i].getPosition());
+
+            if (i >= 7 && i <= 17)
+            {
+                Ci.setRotation(180);
+                price.setRotation(180);
+                Ci.move(90, 90);
+                price.move(55, 55);
+            }
+            else if (i >= 18 && i <= 24)
+            {
+                Ci.setRotation(270);
+                price.setRotation(270);
+                Ci.move(0, 80);
+                price.move(50, 65);
+            }
+            else if (i >= 24 && i <= 34)
+            {
+                Ci.setRotation(0);
+                price.setRotation(0);
+                Ci.move(25, 0);
+                price.move(38, 35);
+            }
+            else
+            {
+                Ci.setRotation(90);
+                price.setRotation(90);
+                Ci.move(100, 20);
+                price.move(50, 35);
+            }
+
+            window.draw(price, sf::RenderStates()),
+            window.draw(Ci, sf::RenderStates());
+          
+        }
+        else
+        {
+            font.loadFromFile(ARIAL_FONT);
+            Ci.setFont(font);
+            Ci.setString(C.Name[name]);
+            Ci.setCharacterSize(15);
+            Ci.setFillColor(outlineColor);
+            Ci.setStyle(sf::Text::Bold);
+            Ci.setPosition(Board[i].getPosition());
+
+            price.setFont(font);
+            price.setString(to_string(C.Price[name]));
+            price.setCharacterSize(15);
+            price.setFillColor(outlineColor);
+            price.setStyle(sf::Text::Bold);
+            price.setPosition(Board[i].getPosition());
+
+            if (i >= 7 && i <= 17)
+            {
+                Ci.setRotation(180);
+                price.setRotation(180);
+                Ci.move(90, 90);
+                price.move(55, 55);
+            }
+            else if (i >= 18 && i <= 24)
+            {
+                Ci.setRotation(270);
+                price.setRotation(270);
+                Ci.move(0, 80);
+                price.move(50, 65);
+            }
+            else if (i >= 24 && i <= 34)
+            {
+                Ci.setRotation(0);
+                price.setRotation(0);
+                Ci.move(25, 0);
+                price.move(38, 35);
+            }
+            else
+            {
+                Ci.setRotation(90);
+                price.setRotation(90);
+                Ci.move(100, 20);
+                price.move(50, 35);
+            }
+
+
+            window.draw(price, sf::RenderStates()),
+            window.draw(Ci, sf::RenderStates());
+        }
+    }
+}
 
 //void GUI::input()
 //{

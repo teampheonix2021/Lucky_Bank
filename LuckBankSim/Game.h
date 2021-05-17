@@ -13,6 +13,7 @@ using namespace std::chrono;
 #include "BoardObjects/Rectangle.h"
 #include "BoardObjects/TextBox.h"
 #include "BoardObjects/PlayerData.h"
+#include "BoardObjects/DrawCity.h"
 
 // Represents a game, keeps track of everything relevant to the game and delegates the tasks to their proper objects
 class Game
@@ -29,6 +30,7 @@ private:
     textbox textbo;
     Player player;
     PlayerData data;
+    DrawCity City;
 
     bool exit;  // Flags about the user's exit keygame controls
     

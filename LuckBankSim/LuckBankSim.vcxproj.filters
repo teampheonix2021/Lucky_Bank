@@ -52,6 +52,9 @@
     <ClCompile Include="BoardObjects\PlayerData.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
+    <ClCompile Include="BoardObjects\DrawCity.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Drawable.h">
@@ -106,6 +109,9 @@
       <Filter>Header Files\spaces</Filter>
     </ClInclude>
     <ClInclude Include="BoardObjects\PlayerData.h">
+      <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjects\DrawCity.h">
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -20,6 +20,13 @@ public:
     explicit City();
     void setGroup(int a);
     City Readcities(City & C);
+    int getparkprice(int);
+    int getparkfees(int);
+    int getrestprice(int);
+    int getrestfees(int);
+    int getmarketprice(int);
+    int getmarketfees(int);
+    int getgroup();
     vector<string> Name;
     vector<int> Price;
     vector<int> PassingFees;

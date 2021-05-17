@@ -18,7 +18,7 @@ private:
     City C;
     int textbox = 0;
     string numofplayer;
-    bool playbuttonbool;
+    bool playbuttonbool = false;
     sf::Text Player2;
     sf::Text Player3;
     sf::Text Player4;
@@ -46,7 +46,7 @@ private:
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
 
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4], rectangleleft[8], rectangleright[8], rectangleup[9],rectangledown[9],Luckrectangle,Courtrectangle ,Player[4], players_2, players_3, players_4; // Rectangle edges of the board components
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4],Board[34],Luckrectangle,Courtrectangle ,Player[4], players_2, players_3, players_4; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -77,6 +77,8 @@ public:
     void settextbox(int x);
     void setmousepos(sf::Vector2f);
     void playbutton(bool); //checks if the play button is pressed or not
+    void citydata(string, int, int, int, int, int, int, int, int, int);
+    void DrawCity();
 };
 
 //https://www.rapidtables.com/web/color/RGB_Color.html to generate the color we want by using sf::Color::Color(red value ,green value , blue value);

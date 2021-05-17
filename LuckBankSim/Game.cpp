@@ -58,6 +58,9 @@ void Game::updateGUIOutput()
     // player's data
     data.draw(gui);
 
+    //Draw the city on the board
+    City.draw(gui);
+
     gui.display();
     
 }

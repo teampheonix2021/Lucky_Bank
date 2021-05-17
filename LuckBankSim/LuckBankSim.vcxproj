@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Dice.h" />
+    <ClInclude Include="BoardObjects\DrawCity.h" />
     <ClInclude Include="BoardObjects\Edge.h" />
     <ClInclude Include="BoardObjects\Menu.h" />
     <ClInclude Include="BoardObjects\MessageBox.h" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoardObjects\Dice.cpp" />
+    <ClCompile Include="BoardObjects\DrawCity.cpp" />
     <ClCompile Include="BoardObjects\Menu.cpp" />
     <ClCompile Include="BoardObjects\Player.cpp" />
     <ClCompile Include="BoardObjects\PlayerData.cpp" />
