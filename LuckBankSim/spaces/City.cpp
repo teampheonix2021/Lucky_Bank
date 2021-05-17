@@ -108,3 +108,7 @@ int City::getmarketfees(int index)
 	return M.MarketFees[index];
 }
 
+int City::getgroup(int index)
+{
+	return G.Group1[index];
+}

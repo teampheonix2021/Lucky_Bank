@@ -1002,6 +1002,44 @@ void GUI::DrawCity()
         sf::Text price;
         sf::Font font;
         sf::Text Ci;
+        sf::Color citycolor;
+
+        if (C.getgroup(name) == 1)
+        {
+            citycolor = sf::Color::Blue;
+        }
+        else  if (C.getgroup(name) == 2)
+        {
+            citycolor = sf::Color::Green;
+        }
+        else  if (C.getgroup(name) == 3)
+        {
+            citycolor = sf::Color::Red;
+        }
+        else  if (C.getgroup(name) == 4)
+        {
+            citycolor = sf::Color::Color(255,64,70);
+        }
+        else  if (C.getgroup(name) == 5)
+        {
+            citycolor = sf::Color::Color(255, 154, 157);
+        }
+        else  if (C.getgroup(name) == 6)
+        {
+            citycolor = sf::Color::Color(178, 77, 80);
+        }
+        else  if (C.getgroup(name) == 7)
+        {
+            citycolor = sf::Color::Color(255, 213, 0);
+        }
+        else  if (C.getgroup(name) == 8)
+        {
+            citycolor = sf::Color::Color(159, 140, 44);
+        }
+        else  if (C.getgroup(name) == 9)
+        {
+            citycolor = sf::Color::Color(1, 180, 255);
+        }
         if (i == 0 || i == 3 || i == 7 || i == 10 || i == 12 || i == 14 || i == 17 || i == 20 || i == 24 || i == 29 || i == 31)
         {
             i = i + 1;
@@ -1009,7 +1047,7 @@ void GUI::DrawCity()
             Ci.setFont(font);
             Ci.setString(C.Name[name]);
             Ci.setCharacterSize(15);
-            Ci.setFillColor(outlineColor);
+            Ci.setFillColor(citycolor);
             Ci.setStyle(sf::Text::Bold);
             Ci.setPosition(Board[i].getPosition());
 
@@ -1059,7 +1097,7 @@ void GUI::DrawCity()
             Ci.setFont(font);
             Ci.setString(C.Name[name]);
             Ci.setCharacterSize(15);
-            Ci.setFillColor(outlineColor);
+            Ci.setFillColor(citycolor);
             Ci.setStyle(sf::Text::Bold);
             Ci.setPosition(Board[i].getPosition());
 

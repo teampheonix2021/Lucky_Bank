@@ -25,7 +25,7 @@ public:
     int getrestfees(int);
     int getmarketprice(int);
     int getmarketfees(int);
-    int getgroup();
+    int getgroup(int);
     vector<string> Name;
     vector<int> Price;
     vector<int> PassingFees;
