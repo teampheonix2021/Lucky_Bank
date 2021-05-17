@@ -8,6 +8,9 @@
 *.db
 *.suo
 .vs/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 Debug/
 x64/
 /LuckBankSim/Debug/
