@@ -2,7 +2,7 @@
 #include <fstream>
 #include "space.h"
 #include <string>
-#include "Defs.h"
+#include "../Defs.h"
 #include"Parking.h"
 #include"RestArea.h"
 #include"Market.h"
@@ -12,9 +12,6 @@ using namespace std;
 class City : public Space
 {
 protected:
-   //string Name;
-   //int Price;
-   //int PassingFees;
    Group G;
    Parking P;
    RestArea R;

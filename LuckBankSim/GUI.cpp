@@ -38,6 +38,7 @@ void GUI::getControls(bool& exit)
             sf::FloatRect player2 = Player[2].getGlobalBounds();
             sf::FloatRect player3 = Player[1].getGlobalBounds();
             sf::FloatRect player4 = Player[0].getGlobalBounds();
+            sf::FloatRect Jerusalem = rectangleleft[1].getGlobalBounds();
             if (diceBtnBounds2.contains(mousePos2))
             {
                 textbox = 1;
@@ -98,6 +99,10 @@ void GUI::getControls(bool& exit)
                     textbox = 7;
                 }
             }
+            else if (Jerusalem.contains(mousePos2) && messagePrompt.isOpen() == false && playbuttonbool == true)
+            {
+                textbox = 8;
+            }
             else
             {
                 textbox = 0;
@@ -155,7 +160,7 @@ void GUI::getControls(bool& exit)
             if (okButtonBounds.contains(mousePos))
             {
                 messagePrompt.close();
-
+                C.Readcities(C);
             }
 
         }
@@ -847,6 +852,14 @@ void GUI::drawtextbox()
     if (textbox == 7)
     {
         playerdata("Player 4");
+    }
+
+    if (textbox == 8)
+    {
+        if (messagePrompt.isOpen() == false)
+        {
+            playerdata(C.Name[0]);
+        }
     }
 }
 

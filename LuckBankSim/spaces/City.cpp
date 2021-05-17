@@ -4,15 +4,18 @@
 #include <sstream>
 using namespace std;
 
-City::City() {}
+City::City()
+{
+	G.Group = 0;
+}
 
 void City::setGroup(int a)
 {
 	G.Group = a;
 }
 
-//spaceinfo
- City City::Readcities(City & C)
+
+City City::Readcities(City & C)
 {
 	fstream infile;
 	infile.open("bankofluckfiles\\spaceinfo.txt");
@@ -28,20 +31,6 @@ void City::setGroup(int a)
 		char line[size];
 		string Y_1 = "ClubOfLuck";
 		string Y_2 = "GasStation";
-		
-		//while (infile.getline(line, size))
-		//{
-		//	//parse the line
-		//	
-		//	
-		//		pch = strtok_s(line, ",", &context);
-		//		while (pch != nullptr)
-		//		{
-		//			pch = strtok_s(NULL, ",", &context);
-		//		}
-		//		counter++;
-		//	
-		//}
 
 		while (infile.getline(line, size))
 		{
@@ -58,7 +47,7 @@ void City::setGroup(int a)
 						break;
 					}
 
-					if (pch == Y_1)// skip the gas station
+					if (pch == Y_2)// skip the gas station
 					{
 						pch = strtok_s(nullptr, ",", &context);
 						pch = strtok_s(nullptr, ",", &context);
@@ -68,11 +57,9 @@ void City::setGroup(int a)
 
 					Name.push_back(pch);//push the name
 					pch = strtok_s(nullptr, ",", &context);
-					//stringstream temp(pch);
-					//temp >> c[i].price;
 					Price.push_back(atoi(pch));//push the price
 					pch = strtok_s(nullptr, ",", &context);
-					PassingFees.push_back(atoi(pch));//push the
+					PassingFees.push_back(atoi(pch));//push the passing fees
 					pch = strtok_s(nullptr, ",", &context);
 					P.GaragePrice.push_back(atoi(pch));//push the garage price
 					pch = strtok_s(nullptr, ",", &context);
@@ -89,11 +76,8 @@ void City::setGroup(int a)
 					G.Group = atoi(pch); // push the group
 					pch = strtok_s(nullptr, ",", &context);
 				}
-			
-			
 		}
 		infile.close();
-
 	}
 	return C;
 }

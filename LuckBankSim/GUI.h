@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "Defs.h"
+#include "spaces/City.h"
+
 
 // Represents the game GUI
 // This class is the ONLY one that interacts with the user
@@ -13,6 +15,7 @@ class GUI
 {
 private:
     //edits
+    City C;
     int textbox = 0;
     string numofplayer;
     bool playbuttonbool;
@@ -70,7 +73,7 @@ public:
     void player(); // draw player's avatar
     void loadtextbox(string textbox, sf::Vector2f); //display the text box
     void drawtextbox();
-    void playerdata(string textbox);
+    void playerdata(string textbox); // display info rectangle
     void settextbox(int x);
     void setmousepos(sf::Vector2f);
     void playbutton(bool); //checks if the play button is pressed or not

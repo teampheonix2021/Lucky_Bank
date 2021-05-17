@@ -1,4 +1,5 @@
 #pragma once
+
 class Space
 {
 private:
@@ -6,6 +7,6 @@ private:
 	
 public:
 	Space();
-	virtual void Readcities() = 0;
+	//virtual Space* Readcities() = 0;
 };
 

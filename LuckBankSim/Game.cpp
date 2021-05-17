@@ -29,6 +29,7 @@ void Game::updateGUIOutput()
    gui.clear();
 
 
+
     // Drawing the Edges of the spaces, line by line
     leftEdge.draw(gui);
     rightEdge.draw(gui);
