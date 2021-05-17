@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoardObjects\Avatar.h" />
     <ClInclude Include="BoardObjects\Dice.h" />
     <ClInclude Include="BoardObjects\DrawCity.h" />
     <ClInclude Include="BoardObjects\Edge.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="BoardObjects\Rectangle.h" />
     <ClInclude Include="BoardObjects\Text.h" />
     <ClInclude Include="BoardObjects\TextBox.h" />
+    <ClInclude Include="BoardObjects\UserInput.h" />
     <ClInclude Include="ClubOfLuck.h" />
     <ClInclude Include="Defs.h" />
     <ClInclude Include="Game.h" />
@@ -155,12 +157,15 @@
     <ClInclude Include="GasStation.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="spaces\City.h" />
+    <ClInclude Include="spaces\Court.h" />
+    <ClInclude Include="spaces\Luck.h" />
     <ClInclude Include="spaces\Market.h" />
     <ClInclude Include="spaces\Parking.h" />
     <ClInclude Include="spaces\RestArea.h" />
     <ClInclude Include="spaces\space.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoardObjects\Avatar.cpp" />
     <ClCompile Include="BoardObjects\Dice.cpp" />
     <ClCompile Include="BoardObjects\DrawCity.cpp" />
     <ClCompile Include="BoardObjects\Menu.cpp" />
@@ -169,6 +174,7 @@
     <ClCompile Include="BoardObjects\Rectangle.cpp" />
     <ClCompile Include="BoardObjects\Text.cpp" />
     <ClCompile Include="BoardObjects\TextBox.cpp" />
+    <ClCompile Include="BoardObjects\UserInput.cpp" />
     <ClCompile Include="ClubOfLuck.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BoardObjects\Edge.cpp" />
@@ -177,6 +183,8 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="spaces\City.cpp" />
+    <ClCompile Include="spaces\Court.cpp" />
+    <ClCompile Include="spaces\Luck.cpp" />
     <ClCompile Include="spaces\Market.cpp" />
     <ClCompile Include="spaces\Parking.cpp" />
     <ClCompile Include="spaces\RestArea.cpp" />

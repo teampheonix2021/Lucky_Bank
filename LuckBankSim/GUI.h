@@ -2,9 +2,12 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-
+#include <chrono>
+#include <random>
 #include "Defs.h"
 #include "spaces/City.h"
+#include "spaces/Court.h"
+#include "spaces/Luck.h"
 
 
 // Represents the game GUI
@@ -16,9 +19,16 @@ class GUI
 private:
     //edits
     City C;
+    Luck L;
+    Court Co;
+    int luckcards = 0;
+    int courcards = 0;
     int textbox = 0;
+    int roll;
     string numofplayer;
     bool playbuttonbool = false;
+    bool drawavatarbool = false;
+    int i = 0;
     sf::Text Player2;
     sf::Text Player3;
     sf::Text Player4;
@@ -28,7 +38,7 @@ private:
 
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
-    //sf::RenderWindow userinput; //Represents the user input
+    sf::RenderWindow userinput; //Represents the user input
     
     //Blending mode, mix between the image and the rectangle-credits to ENG KAREEEEEEEEEEEEEEEEEEEEEEEM*******
     sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
@@ -46,7 +56,7 @@ private:
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
 
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4],Board[34],Luckrectangle,Courtrectangle ,Player[4], players_2, players_3, players_4; // Rectangle edges of the board components
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4],Board[34],Luckrectangle,Courtrectangle ,Player[4], players_2, players_3, players_4, Avatar[4]; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -77,8 +87,14 @@ public:
     void settextbox(int x);
     void setmousepos(sf::Vector2f);
     void playbutton(bool); //checks if the play button is pressed or not
+    void ava(bool);
     void citydata(string, int, int, int, int, int, int, int, int, int);
     void DrawCity();
+    void drawcourt(int);
+    void drawluck(int);
+    void drawluckcourt(string path, float offsetPositionX, float offsetPositionY, float scaleX, float scaleY);
+    void drawavatar();
+    void moveavatar();
 };
 
 //https://www.rapidtables.com/web/color/RGB_Color.html to generate the color we want by using sf::Color::Color(red value ,green value , blue value);

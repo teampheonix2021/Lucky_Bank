@@ -18,6 +18,9 @@ GUI::GUI()
 
    //load the dice sides array 
    loadDiceSides();
+   C.Readcities(C);
+   L.ReadLuckCourt(L);
+   Co.ReadLuckCourt(Co);
 }
 
 // Function for getting control on any event such as keyboard or mouse 
@@ -34,6 +37,25 @@ void GUI::getControls(bool& exit)
             if (Jerusalem.contains(mousePos) && messagePrompt.isOpen() == false && playbuttonbool == true)
             {
                 textbox = 8;
+            }
+        }
+
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            sf::FloatRect Luckrect = Luckrectangle.getGlobalBounds();
+            sf::FloatRect Courtrect = Courtrectangle.getGlobalBounds();
+
+            if (Luckrect.contains(mousePos))
+            {
+                luckcards = rand() % 15;
+                drawluck(luckcards);
+            }
+
+            if (Courtrect.contains(mousePos))
+            {
+                courcards = rand() % 15;
+                drawluck(courcards);
             }
         }
 
@@ -125,7 +147,7 @@ void GUI::getControls(bool& exit)
            window.close();
        }
        //check if the left button of the mouse is pressed
-       if (event.MouseButtonReleased&& event.mouseButton.button==sf::Mouse::Left)
+       if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             sf::FloatRect diceBtnBounds = diceRect.getGlobalBounds();
@@ -139,8 +161,8 @@ void GUI::getControls(bool& exit)
                 {
                     lastRoll = 0;
                     numberOfRolling = 0;
-
                 }
+                moveavatar();
             }
 
             //if mouse left button is pressed on the play button, The message box is appread
@@ -150,6 +172,7 @@ void GUI::getControls(bool& exit)
                 sf::ContextSettings settings;
                 settings.antialiasingLevel = 8;  // Remove this line if the Board was too laggy
                 messagePrompt.create(sf::VideoMode(265, 166), "messageBox", sf::Style::Titlebar, settings);
+                //userinput.create(sf::VideoMode(265, 166), "Avatar", sf::Style::Titlebar, settings);
                 messagePrompt.setVerticalSyncEnabled(true);
             }
         }
@@ -166,12 +189,25 @@ void GUI::getControls(bool& exit)
             if (okButtonBounds.contains(mousePos))
             {
                 messagePrompt.close();
-                C.Readcities(C);
             }
 
         }
     }//loop of messagebox events
 
+    //while (userinput.pollEvent(event))
+    //{
+    //    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    //    {
+    //        sf::Vector2f mousePos = userinput.mapPixelToCoords(sf::Mouse::getPosition(userinput));
+    //        sf::FloatRect okButtonBounds = okButton.getGlobalBounds();
+
+    //        if (okButtonBounds.contains(mousePos))
+    //        {
+    //            userinput.close();
+    //        }
+
+    //    }
+    //}
 }
 
 void GUI::clear()
@@ -307,7 +343,6 @@ void GUI::drawMessageBox()
     messageTitle3.setStyle(sf::Text::Bold);
 
 
-    
    /* sf::Event event;
     playerText.setCharacterSize(25);
     playerText.setFont(arialFont);
@@ -559,17 +594,17 @@ void GUI::drawRollDice()
     if (playbuttonbool == true && messagePrompt.isOpen() == false)
     {
         // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-        if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 8)
+        if (numberOfRolling <= 10 && numberOfRolling - lastRoll == 2)
         {
             int  dicePicNumber = rand() % 6;
             diceRect.setTexture(&diceTexture[dicePicNumber]);
             lastRoll = numberOfRolling;
-
+            roll = dicePicNumber + 1;
         }
         //draw the new side
         window.draw(diceRect, multiplicativeBlending);
 
-        if (numberOfRolling <= 100) numberOfRolling++;
+        if (numberOfRolling <= 10) numberOfRolling++;
     }
 }
 
@@ -898,7 +933,6 @@ void GUI::player()
             Player[1].setOutlineColor(outlineColor);
             Player[1].setOutlineThickness(outlineThickness);
             Player[1].setPosition(50, 650);
-
             window.draw(Player[0], multiplicativeBlending);
             window.draw(Player[1], multiplicativeBlending);
         }
@@ -946,6 +980,7 @@ void GUI::player()
             Player[3].setOutlineColor(outlineColor);
             Player[3].setOutlineThickness(outlineThickness);
             Player[3].setPosition(50, 450);
+
             window.draw(Player[0], multiplicativeBlending);
             window.draw(Player[1], multiplicativeBlending);
             window.draw(Player[2], multiplicativeBlending);
@@ -980,6 +1015,10 @@ void GUI::playbutton(bool x)
     playbuttonbool = x;
 }
 
+void GUI::ava(bool x)
+{
+    drawavatarbool = x;
+}
 
 void GUI::citydata(string name, int price, int passingfees, int Garageprice, int Garagefees, int restprice, int restfees, int marketprice, int marketfees, int index)
 {
@@ -997,149 +1036,152 @@ void GUI::citydata(string name, int price, int passingfees, int Garageprice, int
 //drawing cities on board with Auto Functions
 void GUI::DrawCity()
 {
-    for (int i = 0,name = 0; name < C.Name.size(); i++,name++)
+    if (messagePrompt.isOpen() == false && playbuttonbool == true)
     {
-        sf::Text price;
-        sf::Font font;
-        sf::Text Ci;
-        sf::Color citycolor;
+        for (int i = 0, name = 0; name < C.Name.size(); i++, name++)
+        {
+            sf::Text price;
+            sf::Font font;
+            sf::Text Ci;
+            sf::Color citycolor;
 
-        if (C.getgroup(name) == 1)
-        {
-            citycolor = sf::Color::Blue;
-        }
-        else  if (C.getgroup(name) == 2)
-        {
-            citycolor = sf::Color::Green;
-        }
-        else  if (C.getgroup(name) == 3)
-        {
-            citycolor = sf::Color::Red;
-        }
-        else  if (C.getgroup(name) == 4)
-        {
-            citycolor = sf::Color::Color(255,64,70);
-        }
-        else  if (C.getgroup(name) == 5)
-        {
-            citycolor = sf::Color::Color(255, 154, 157);
-        }
-        else  if (C.getgroup(name) == 6)
-        {
-            citycolor = sf::Color::Color(178, 77, 80);
-        }
-        else  if (C.getgroup(name) == 7)
-        {
-            citycolor = sf::Color::Color(255, 213, 0);
-        }
-        else  if (C.getgroup(name) == 8)
-        {
-            citycolor = sf::Color::Color(159, 140, 44);
-        }
-        else  if (C.getgroup(name) == 9)
-        {
-            citycolor = sf::Color::Color(1, 180, 255);
-        }
-        if (i == 0 || i == 3 || i == 7 || i == 10 || i == 12 || i == 14 || i == 17 || i == 20 || i == 24 || i == 29 || i == 31)
-        {
-            i = i + 1;
-            font.loadFromFile(ARIAL_FONT);
-            Ci.setFont(font);
-            Ci.setString(C.Name[name]);
-            Ci.setCharacterSize(15);
-            Ci.setFillColor(citycolor);
-            Ci.setStyle(sf::Text::Bold);
-            Ci.setPosition(Board[i].getPosition());
+            if (C.getgroup(name) == 1)
+            {
+                citycolor = sf::Color::Blue;
+            }
+            else  if (C.getgroup(name) == 2)
+            {
+                citycolor = sf::Color::Green;
+            }
+            else  if (C.getgroup(name) == 3)
+            {
+                citycolor = sf::Color::Red;
+            }
+            else  if (C.getgroup(name) == 4)
+            {
+                citycolor = sf::Color::Color(255, 64, 70);
+            }
+            else  if (C.getgroup(name) == 5)
+            {
+                citycolor = sf::Color::Color(255, 154, 157);
+            }
+            else  if (C.getgroup(name) == 6)
+            {
+                citycolor = sf::Color::Color(178, 77, 80);
+            }
+            else  if (C.getgroup(name) == 7)
+            {
+                citycolor = sf::Color::Color(255, 213, 0);
+            }
+            else  if (C.getgroup(name) == 8)
+            {
+                citycolor = sf::Color::Color(159, 140, 44);
+            }
+            else  if (C.getgroup(name) == 9)
+            {
+                citycolor = sf::Color::Color(1, 180, 255);
+            }
+            if (i == 0 || i == 3 || i == 7 || i == 10 || i == 12 || i == 14 || i == 17 || i == 20 || i == 24 || i == 29 || i == 31)
+            {
+                i = i + 1;
+                font.loadFromFile(ARIAL_FONT);
+                Ci.setFont(font);
+                Ci.setString(C.Name[name]);
+                Ci.setCharacterSize(15);
+                Ci.setFillColor(citycolor);
+                Ci.setStyle(sf::Text::Bold);
+                Ci.setPosition(Board[i].getPosition());
 
-            price.setFont(font);
-            price.setString(to_string(C.Price[name]));
-            price.setCharacterSize(15);
-            price.setFillColor(outlineColor);
-            price.setStyle(sf::Text::Bold);
-            price.setPosition(Board[i].getPosition());
+                price.setFont(font);
+                price.setString(to_string(C.Price[name]));
+                price.setCharacterSize(15);
+                price.setFillColor(outlineColor);
+                price.setStyle(sf::Text::Bold);
+                price.setPosition(Board[i].getPosition());
 
-            if (i >= 7 && i <= 17)
-            {
-                Ci.setRotation(180);
-                price.setRotation(180);
-                Ci.move(90, 90);
-                price.move(55, 55);
-            }
-            else if (i >= 18 && i <= 24)
-            {
-                Ci.setRotation(270);
-                price.setRotation(270);
-                Ci.move(0, 80);
-                price.move(50, 65);
-            }
-            else if (i >= 24 && i <= 34)
-            {
-                Ci.setRotation(0);
-                price.setRotation(0);
-                Ci.move(25, 0);
-                price.move(38, 35);
-            }
-            else
-            {
-                Ci.setRotation(90);
-                price.setRotation(90);
-                Ci.move(100, 20);
-                price.move(50, 35);
-            }
+                if (i >= 7 && i <= 17)
+                {
+                    Ci.setRotation(180);
+                    price.setRotation(180);
+                    Ci.move(90, 90);
+                    price.move(55, 55);
+                }
+                else if (i >= 18 && i <= 24)
+                {
+                    Ci.setRotation(270);
+                    price.setRotation(270);
+                    Ci.move(0, 80);
+                    price.move(50, 65);
+                }
+                else if (i >= 24 && i <= 34)
+                {
+                    Ci.setRotation(0);
+                    price.setRotation(0);
+                    Ci.move(25, 0);
+                    price.move(38, 35);
+                }
+                else
+                {
+                    Ci.setRotation(90);
+                    price.setRotation(90);
+                    Ci.move(100, 20);
+                    price.move(50, 35);
+                }
 
-            window.draw(price, sf::RenderStates()),
-            window.draw(Ci, sf::RenderStates());
-          
-        }
-        else
-        {
-            font.loadFromFile(ARIAL_FONT);
-            Ci.setFont(font);
-            Ci.setString(C.Name[name]);
-            Ci.setCharacterSize(15);
-            Ci.setFillColor(citycolor);
-            Ci.setStyle(sf::Text::Bold);
-            Ci.setPosition(Board[i].getPosition());
+                window.draw(price, sf::RenderStates()),
+                    window.draw(Ci, sf::RenderStates());
 
-            price.setFont(font);
-            price.setString(to_string(C.Price[name]));
-            price.setCharacterSize(15);
-            price.setFillColor(outlineColor);
-            price.setStyle(sf::Text::Bold);
-            price.setPosition(Board[i].getPosition());
-
-            if (i >= 7 && i <= 17)
-            {
-                Ci.setRotation(180);
-                price.setRotation(180);
-                Ci.move(90, 90);
-                price.move(55, 55);
-            }
-            else if (i >= 18 && i <= 24)
-            {
-                Ci.setRotation(270);
-                price.setRotation(270);
-                Ci.move(0, 80);
-                price.move(50, 65);
-            }
-            else if (i >= 24 && i <= 34)
-            {
-                Ci.setRotation(0);
-                price.setRotation(0);
-                Ci.move(25, 0);
-                price.move(38, 35);
             }
             else
             {
-                Ci.setRotation(90);
-                price.setRotation(90);
-                Ci.move(100, 20);
-                price.move(50, 35);
+                font.loadFromFile(ARIAL_FONT);
+                Ci.setFont(font);
+                Ci.setString(C.Name[name]);
+                Ci.setCharacterSize(15);
+                Ci.setFillColor(citycolor);
+                Ci.setStyle(sf::Text::Bold);
+                Ci.setPosition(Board[i].getPosition());
+
+                price.setFont(font);
+                price.setString(to_string(C.Price[name]));
+                price.setCharacterSize(15);
+                price.setFillColor(outlineColor);
+                price.setStyle(sf::Text::Bold);
+                price.setPosition(Board[i].getPosition());
+
+                if (i >= 7 && i <= 17)
+                {
+                    Ci.setRotation(180);
+                    price.setRotation(180);
+                    Ci.move(90, 90);
+                    price.move(55, 55);
+                }
+                else if (i >= 18 && i <= 24)
+                {
+                    Ci.setRotation(270);
+                    price.setRotation(270);
+                    Ci.move(0, 80);
+                    price.move(50, 65);
+                }
+                else if (i >= 24 && i <= 34)
+                {
+                    Ci.setRotation(0);
+                    price.setRotation(0);
+                    Ci.move(25, 0);
+                    price.move(38, 35);
+                }
+                else
+                {
+                    Ci.setRotation(90);
+                    price.setRotation(90);
+                    Ci.move(100, 20);
+                    price.move(50, 35);
+                }
+
+
+                window.draw(price, sf::RenderStates()),
+                    window.draw(Ci, sf::RenderStates());
             }
-
-
-            window.draw(price, sf::RenderStates()),
-            window.draw(Ci, sf::RenderStates());
         }
     }
 }
@@ -1147,13 +1189,23 @@ void GUI::DrawCity()
 //void GUI::input()
 //{
 //    sf::Font arialFont;
+//    sf::Texture texture;
+//    sf::Sprite sprite;
 //    arialFont.loadFromFile(ARIAL_FONT);
-//    sf::Event event;
-//    playerText.setCharacterSize(25);
-//    playerText.setFont(arialFont);
-//    playerText.setPosition(15, 50);
-//    playerText.setFillColor(outlineColor);
-//    std::string playerInput;
+//    texture.loadFromFile("Images\\Icon1.jpeg");
+//    sprite.setTexture(texture);
+//    sprite.setPosition(100, 50); // offset relative to the original position(0,0)
+//    sprite.scale(sf::Vector2f(0.3, 0.3)); // factor relative to the current scale
+//    userinput.draw(sprite);
+//
+//
+//    sf::Text messageTitle;
+//    messageTitle.setString("Choose Avatars :");
+//    messageTitle.setCharacterSize(25);
+//    messageTitle.setFont(arialFont);
+//    messageTitle.setPosition(15.0f, 15.0f);
+//    messageTitle.setFillColor(outlineColor);
+//
 //
 //    sf::Texture okButtonTexture;
 //    okButtonTexture.loadFromFile("Images\\ok.png");
@@ -1164,24 +1216,132 @@ void GUI::DrawCity()
 //    okButton.setOutlineColor(outlineColor);
 //    okButtonTexture.setSmooth(true);
 //
-//    while (userinput.pollEvent(event))
-//    {
-//        if (event.type == sf::Event::TextEntered)
-//        {
-//            playerInput += event.text.unicode;
-//            if (stoi(playerInput) >= 1 && stoi(playerInput) <= 4)
-//            {
-//                numofplayer = stoi(playerInput);
-//            }
-//            else
-//            {
-//                playerText.setString("Choose Between 1 and 4");
-//            }
-//            playerText.setString(playerInput);
-//        }
-//    }
+//
 //    userinput.clear(backgroundColor);
+//
+//    userinput.draw(messageTitle);
+//    userinput.draw(sprite);
 //    userinput.draw(okButton);
-//    userinput.draw(playerText);
+//
 //    userinput.display();
+
+
+
+    /*sf::Event event;
+    playertext.setcharactersize(25);
+    playertext.setfont(arialfont);
+    playertext.setposition(15, 50);
+    playertext.setfillcolor(outlinecolor);
+    std::string playerinput;
+
+    sf::texture okbuttontexture;
+    okbuttontexture.loadfromfile("images\\ok.png");
+    okbutton.setsize(sf::vector2f(40.0f, 40.0f));
+    okbutton.settexture(&okbuttontexture);
+    okbutton.setposition(120.0f, 125.0f);
+    okbutton.setoutlinethickness(outlinethickness);
+    okbutton.setoutlinecolor(outlinecolor);
+    okbuttontexture.setsmooth(true);
+
+    while (userinput.pollevent(event))
+    {
+        if (event.type == sf::event::textentered)
+        {
+            playerinput += event.text.unicode;
+            if (stoi(playerinput) >= 1 && stoi(playerinput) <= 4)
+            {
+                numofplayer = stoi(playerinput);
+            }
+            else
+            {
+                playertext.setstring("choose between 1 and 4");
+            }
+            playertext.setstring(playerinput);
+        }
+    }
+    userinput.clear(backgroundcolor);
+    userinput.draw(okbutton);
+    userinput.draw(playertext);
+    userinput.display();*/
 //}
+
+void GUI::drawluck(int index)
+{
+    drawluckcourt("BankOfLuckFiles\\Luck-Court Card\\" + L.Location[index], 950, 200, 0.5, 0.5);
+}
+
+void GUI::drawcourt(int index)
+{
+    drawluckcourt("BankOfLuckFiles\\Luck-Court Card\\" + Co.Location[index], 400, 550, 0.5, 0.5);
+}
+
+void GUI::drawluckcourt(std::string path, float setPositionX, float setPositionY, float scaleX, float scaleY)
+{
+    //Create the texture
+    sf::Texture texture;
+    texture.loadFromFile(path);
+    //Use the sprite to load the image and scale it,  another method in loadDiceSides() function
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setPosition(sf::Vector2f(setPositionX, setPositionY)); // offset relative to the original position(0,0)
+    sprite.scale(sf::Vector2f(scaleX, scaleY)); // factor relative to the current scale
+    // Create play Edge
+
+
+    window.draw(sprite);
+}
+
+void GUI::drawavatar()
+{
+        if (messagePrompt.isOpen() == false && playbuttonbool == true)
+        {
+            int num = stoi(numofplayer);
+            sf::Vector2f position = Board[0].getPosition();
+
+            for (i = 1; i <= num; i++)
+            {
+                sf::Texture texture;
+                texture.loadFromFile("Images\\Icon" + to_string(i) + ".jpeg");
+                //Use the sprite to load the image and scale it,  another method in loadDiceSides() function
+                sf::Sprite sprite;
+                sprite.setTexture(texture);
+                sprite.setPosition(position); // offset relative to the original position(0,0)
+                sprite.scale(sf::Vector2f(0.3, 0.3)); // factor relative to the current scale
+                window.draw(sprite);
+                if (position.x > Board[0].getPosition().x)
+                {
+                    position = Board[0].getPosition();
+                    position = position + sf::Vector2f(0, 35);
+                }
+                else
+                {
+                    position = position + sf::Vector2f(35, 0);
+                }
+            }
+        }
+        ava(true);
+}
+
+//
+void GUI::moveavatar()
+{
+    if (messagePrompt.isOpen() == false && playbuttonbool == true && drawavatarbool == true)
+    {
+        int num = stoi(numofplayer);
+        sf::Vector2f position = Board[0].getPosition();
+        for (i = 1; i <= num; i++)
+        {
+            for (int j = 1; j <= roll; j++)
+            {
+                sf::Texture ff;
+                sf::Sprite f;
+                ff.loadFromFile("Images\\Icon" + to_string(i) + ".jpeg");
+                f.setTexture(ff);
+                f.setPosition(position);
+                f.scale(sf::Vector2f(0.3, 0.3));
+                window.draw(f);
+                position = position + sf::Vector2f(0, 100 + 100);
+            }
+        }
+    }
+}

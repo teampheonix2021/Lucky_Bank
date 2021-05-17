@@ -1,5 +1,5 @@
 #pragma once
-#include "spaces/space.h"
+#include "space.h"
 class Court:
     public Space
 {

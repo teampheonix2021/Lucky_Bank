@@ -61,6 +61,18 @@
     <ClCompile Include="BoardObjects\DrawCity.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
+    <ClCompile Include="spaces\Court.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="spaces\Luck.cpp">
+      <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjects\UserInput.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjects\Avatar.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Drawable.h">
@@ -124,6 +136,18 @@
       <Filter>Header Files\spaces</Filter>
     </ClInclude>
     <ClInclude Include="BoardObjects\DrawCity.h">
+      <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="spaces\Court.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="spaces\Luck.h">
+      <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjects\UserInput.h">
+      <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjects\Avatar.h">
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
   </ItemGroup>
