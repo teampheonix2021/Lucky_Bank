@@ -1,6 +1,7 @@
 #pragma once
 #include<string>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 
@@ -17,5 +18,5 @@ using namespace std;
 
 struct Group
 {
-	int Group;
+	vector <int> Group1;
 };

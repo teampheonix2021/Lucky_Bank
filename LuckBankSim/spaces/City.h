@@ -12,13 +12,12 @@ using namespace std;
 class City : public Space
 {
 protected:
-   Group G;
+    Group G;
    Parking P;
    RestArea R;
    Market M;
 public:
     explicit City();
-    void setGroup(int a);
     City Readcities(City & C);
     int getparkprice(int);
     int getparkfees(int);
