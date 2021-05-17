@@ -6,5 +6,3 @@ Space::Space()
 
 }
 int Space::spacesCount = 0;
-
-int Space::spacesCount = 0;

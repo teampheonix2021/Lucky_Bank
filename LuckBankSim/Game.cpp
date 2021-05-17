@@ -46,9 +46,16 @@ void Game::updateGUIOutput()
     //drawing the text box to the user
     textbo.draw(gui);
 
+
   /// Rolling the dice
     dice.draw(gui);
     text.draw(gui);
+
+    // player's avatar
+    player.draw(gui);
+
+    // player's data
+    data.draw(gui);
 
     gui.display();
     

@@ -12,6 +12,7 @@ using namespace std;
 class City : public Space
 {
 private:
+    int counter = 0;
    string Name;
    int Price;
    int PassingFees;
@@ -20,7 +21,7 @@ private:
    RestArea R;
    Market M;
 public:
-    City();
+    explicit City();
     void setGroup(int a);
     void Readcities();
 };

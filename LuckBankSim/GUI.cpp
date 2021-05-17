@@ -27,28 +27,81 @@ void GUI::getControls(bool& exit)
     //check the window events
     while (window.pollEvent(event)) 
     {
-        sf::Vector2f mousePos2 = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-        sf::FloatRect diceBtnBounds2 = diceRect.getGlobalBounds();
-        sf::FloatRect saveBtnBounds2 = rectangle[0].getGlobalBounds();
-        sf::FloatRect playBtnBounds2 = playRect.getGlobalBounds();
-        if (diceBtnBounds2.contains(mousePos2) && event.TouchEnded)
+        // text box near the mouse icon
+        if (event.TouchEnded)
         {
-            textbox = 1;
-            setmousepos(mousePos2);
-        }
-        else if (saveBtnBounds2.contains(mousePos2) && event.TouchEnded)
-        {
-            textbox = 2;
-            setmousepos(mousePos2);
-        }
-        else if (playBtnBounds2.contains(mousePos2) && event.TouchEnded)
-        {
-            textbox = 3;
-            setmousepos(mousePos2);
-        }
-        else
-        {
-            textbox = 0;
+            sf::Vector2f mousePos2 = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            sf::FloatRect diceBtnBounds2 = diceRect.getGlobalBounds();
+            sf::FloatRect saveBtnBounds2 = rectangle[0].getGlobalBounds();
+            sf::FloatRect playBtnBounds2 = playRect.getGlobalBounds();
+            sf::FloatRect player1 = Player[3].getGlobalBounds();
+            sf::FloatRect player2 = Player[2].getGlobalBounds();
+            sf::FloatRect player3 = Player[1].getGlobalBounds();
+            sf::FloatRect player4 = Player[0].getGlobalBounds();
+            if (diceBtnBounds2.contains(mousePos2))
+            {
+                textbox = 1;
+                setmousepos(mousePos2);
+            }
+            else if (saveBtnBounds2.contains(mousePos2))
+            {
+                textbox = 2;
+                setmousepos(mousePos2);
+            }
+            else if (playBtnBounds2.contains(mousePos2))
+            {
+                textbox = 3;
+                setmousepos(mousePos2);
+            }
+            else if (player1.contains(mousePos2))
+            {
+                textbox = 4;
+            }
+            else if (player2.contains(mousePos2))
+            {
+                if (numofplayer == "3")
+                {
+                    textbox = 4;
+                }
+                else if (numofplayer == "4")
+                {
+                    textbox = 5;
+                }
+            }
+            else if (player3.contains(mousePos2))
+            {
+                if (numofplayer == "2")
+                {
+                    textbox = 4;
+                }
+                else if (numofplayer == "3")
+                {
+                    textbox = 5;
+                }
+                else if (numofplayer == "4")
+                {
+                    textbox = 6;
+                }
+            }
+            else if (player4.contains(mousePos2))
+            {
+                if (numofplayer == "2")
+                {
+                    textbox = 5;
+                }
+                else if (numofplayer == "3")
+                {
+                    textbox = 6;
+                }
+                else if (numofplayer == "4")
+                {
+                    textbox = 7;
+                }
+            }
+            else
+            {
+                textbox = 0;
+            }
         }
 
         //if ESC button is pressed the game window is closed!
@@ -82,11 +135,11 @@ void GUI::getControls(bool& exit)
             //if mouse left button is pressed on the play button, The message box is appread
             if (playBtnBounds.contains(mousePos))
             {
+                playbutton(true);
                 sf::ContextSettings settings;
                 settings.antialiasingLevel = 8;  // Remove this line if the Board was too laggy
                 messagePrompt.create(sf::VideoMode(265, 166), "messageBox", sf::Style::Titlebar, settings);
                 messagePrompt.setVerticalSyncEnabled(true);
-
             }
         }
     }//loop of window event
@@ -107,6 +160,7 @@ void GUI::getControls(bool& exit)
 
         }
     }//loop of messagebox events
+
 }
 
 void GUI::clear()
@@ -205,8 +259,10 @@ void GUI::drawMenuItems()
 
 void GUI::drawText()
 {
-
-    loadText("Please click here to roll the dice", 628.0f, 470.0f);
+    if (playbuttonbool == true && messagePrompt.isOpen() == false)
+    {
+        loadText("Please click here to roll the dice", 628.0f, 470.0f);
+    }
     loadText("TEST", 240, 500);
 }
 
@@ -216,20 +272,117 @@ void GUI::drawMessageBox()
     sf::Font arialFont;
     arialFont.loadFromFile(ARIAL_FONT);
     sf::Text messageTitle;
-    messageTitle.setString("Welcome");
+    messageTitle.setString("Number Of Players");
     messageTitle.setCharacterSize(25);
     messageTitle.setFont(arialFont);
     messageTitle.setPosition(15.0f, 15.0f);
     messageTitle.setFillColor(outlineColor);
 
-    sf::Text messageText;
-    messageText.setFont(arialFont);
-    messageText.setString("Press on Ok button to Close!");
-    messageText.setPosition(15.0f, 75.0f);
-    messageText.setCharacterSize(15);
-    messageText.setFillColor(outlineColor);
+    sf::Text messageTitle2;
+    messageTitle2.setString("You Chose : ");
+    messageTitle2.setCharacterSize(15);
+    messageTitle2.setFont(arialFont);
+    messageTitle2.setPosition(15.0f, 80.0f);
+    messageTitle2.setFillColor(outlineColor);
 
-  
+    sf::Text messageTitle3;
+    messageTitle3.setString(numofplayer);
+    messageTitle3.setCharacterSize(15);
+    messageTitle3.setFont(arialFont);
+    messageTitle3.setPosition(105.0f, 80.0f);
+    messageTitle3.setFillColor(outlineColor);
+    messageTitle3.setStyle(sf::Text::Bold);
+
+
+    
+   /* sf::Event event;
+    playerText.setCharacterSize(25);
+    playerText.setFont(arialFont);
+    playerText.setPosition(15, 50);
+    playerText.setFillColor(outlineColor);
+    std::string playerInput;
+
+    while (messagePrompt.pollEvent(event))
+    {
+        if (event.type == sf::Event::TextEntered)
+        {
+                playerInput += event.text.unicode;
+                if (stoi(playerInput) >= 1 && stoi(playerInput) <= 4)
+                {
+                    numofplayer = stoi(playerInput);
+                }
+                else
+                {
+                    playerText.setString("Choose Between 1 and 4");
+                }
+                playerText.setString(playerInput);
+        }
+    }*/
+
+   
+    sf::Text Player2;
+    sf::Text Player3;
+    sf::Text Player4;
+
+    Player2.setString("2");
+    Player2.setCharacterSize(25);
+    Player2.setFont(arialFont);
+    Player2.setPosition(50.0f, 50.0f);
+    Player2.setFillColor(outlineColor);
+
+    Player3.setString("3");
+    Player3.setCharacterSize(25);
+    Player3.setFont(arialFont);
+    Player3.setPosition(125.0f, 50.0f);
+    Player3.setFillColor(outlineColor);
+
+    Player4.setString("4");
+    Player4.setCharacterSize(25);
+    Player4.setFont(arialFont);
+    Player4.setPosition(200.0f, 50.0f);
+    Player4.setFillColor(outlineColor);
+
+    sf::Event event;
+    while (messagePrompt.pollEvent(event))
+    {
+        sf::Vector2f mousePos = messagePrompt.mapPixelToCoords(sf::Mouse::getPosition(messagePrompt));
+        sf::FloatRect p2 = players_2.getGlobalBounds();
+        sf::FloatRect p3 = players_3.getGlobalBounds();
+        sf::FloatRect p4 = players_4.getGlobalBounds();
+        if (event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+        {
+            if (p2.contains(mousePos))
+            {
+                numofplayer = Player2.getString();
+            }
+
+            if (p3.contains(mousePos))
+            {
+                numofplayer = Player3.getString();
+            }
+
+            if (p4.contains(mousePos))
+            {
+                numofplayer = Player4.getString();
+            }
+        }
+    }
+
+    players_2.setSize(sf::Vector2f(20.0f, 26.0f));
+    players_2.setPosition(48.0f, 53.0f);
+    players_2.setOutlineThickness(0);
+    players_2.setOutlineColor(outlineColor);
+
+    players_3.setSize(sf::Vector2f(20.0f, 26.0f));
+    players_3.setPosition(123.0f, 53.0f);
+    players_3.setOutlineThickness(0);
+    players_3.setOutlineColor(outlineColor);
+
+    players_4.setSize(sf::Vector2f(20.0f, 26.0f));
+    players_4.setPosition(198.0f, 53.0f);
+    players_4.setOutlineThickness(0);
+    players_4.setOutlineColor(outlineColor);
+
     sf::Texture okButtonTexture;
     okButtonTexture.loadFromFile("Images\\ok.png");
     okButton.setSize(sf::Vector2f(40.0f, 40.0f));
@@ -239,14 +392,22 @@ void GUI::drawMessageBox()
     okButton.setOutlineColor(outlineColor);
     okButtonTexture.setSmooth(true);
 
+
      messagePrompt.clear(backgroundColor);
 
         messagePrompt.draw(messageTitle);
-        messagePrompt.draw(messageText);
+        messagePrompt.draw(messageTitle2);
+        messagePrompt.draw(messageTitle3);
         messagePrompt.draw(okButton);
+        messagePrompt.draw(players_2);
+        messagePrompt.draw(players_3);
+        messagePrompt.draw(players_4);
+        messagePrompt.draw(Player2);
+        messagePrompt.draw(Player3);
+        messagePrompt.draw(Player4);
 
     messagePrompt.display();
-  }
+}
 
 
 
@@ -382,18 +543,21 @@ void GUI::loadDiceSides()
 // //this function is invoked from dice object to roll the dice
 void GUI::drawRollDice()
 {
-    // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
-    if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 8)
+    if (playbuttonbool == true && messagePrompt.isOpen() == false)
     {
-       int  dicePicNumber = rand() % 6;
-        diceRect.setTexture(&diceTexture[dicePicNumber]);
-        lastRoll = numberOfRolling;
-       
-    }
-   //draw the new side
-   window.draw(diceRect, multiplicativeBlending);
+        // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
+        if (numberOfRolling <= 100 && numberOfRolling - lastRoll == 8)
+        {
+            int  dicePicNumber = rand() % 6;
+            diceRect.setTexture(&diceTexture[dicePicNumber]);
+            lastRoll = numberOfRolling;
 
-   if (numberOfRolling <= 100) numberOfRolling++;
+        }
+        //draw the new side
+        window.draw(diceRect, multiplicativeBlending);
+
+        if (numberOfRolling <= 100) numberOfRolling++;
+    }
 }
 
     //function to draw rectangles
@@ -664,6 +828,26 @@ void GUI::drawtextbox()
     {
         loadtextbox("Play Button", mouseposition);
     }
+
+    if (textbox == 4)
+    {
+        playerdata("Player 1");
+    }
+
+    if (textbox == 5)
+    {
+        playerdata("Player 2");
+    }
+
+    if (textbox == 6)
+    {
+        playerdata("Player 3");
+    }
+
+    if (textbox == 7)
+    {
+        playerdata("Player 4");
+    }
 }
 
 void GUI::settextbox(int x)
@@ -675,3 +859,142 @@ void GUI::setmousepos(sf::Vector2f x)
 {
     mouseposition = x;
 }
+
+void GUI::player()
+{
+    if (messagePrompt.isOpen() == false)
+    {
+        if (numofplayer == "2")
+        {
+            Player[0].setSize(sf::Vector2f(100, 100));
+            Player[0].setOutlineColor(outlineColor);
+            Player[0].setOutlineThickness(outlineThickness);
+            Player[0].setPosition(50, 750);
+
+            Player[1].setSize(sf::Vector2f(100, 100));
+            Player[1].setOutlineColor(outlineColor);
+            Player[1].setOutlineThickness(outlineThickness);
+            Player[1].setPosition(50, 650);
+
+            window.draw(Player[0], multiplicativeBlending);
+            window.draw(Player[1], multiplicativeBlending);
+        }
+
+        else if (numofplayer == "3")
+        {
+            Player[0].setSize(sf::Vector2f(100, 100));
+            Player[0].setOutlineColor(outlineColor);
+            Player[0].setOutlineThickness(outlineThickness);
+            Player[0].setPosition(50, 750);
+
+            Player[1].setSize(sf::Vector2f(100, 100));
+            Player[1].setOutlineColor(outlineColor);
+            Player[1].setOutlineThickness(outlineThickness);
+            Player[1].setPosition(50, 650);
+
+            Player[2].setSize(sf::Vector2f(100, 100));
+            Player[2].setOutlineColor(outlineColor);
+            Player[2].setOutlineThickness(outlineThickness);
+            Player[2].setPosition(50, 550);
+
+            window.draw(Player[0], multiplicativeBlending);
+            window.draw(Player[1], multiplicativeBlending);
+            window.draw(Player[2], multiplicativeBlending);
+        }
+
+        else if (numofplayer == "4")
+        {
+            Player[0].setSize(sf::Vector2f(100, 100));
+            Player[0].setOutlineColor(outlineColor);
+            Player[0].setOutlineThickness(outlineThickness);
+            Player[0].setPosition(50, 750);
+
+            Player[1].setSize(sf::Vector2f(100, 100));
+            Player[1].setOutlineColor(outlineColor);
+            Player[1].setOutlineThickness(outlineThickness);
+            Player[1].setPosition(50, 650);
+
+            Player[2].setSize(sf::Vector2f(100, 100));
+            Player[2].setOutlineColor(outlineColor);
+            Player[2].setOutlineThickness(outlineThickness);
+            Player[2].setPosition(50, 550);
+
+            Player[3].setSize(sf::Vector2f(100, 100));
+            Player[3].setOutlineColor(outlineColor);
+            Player[3].setOutlineThickness(outlineThickness);
+            Player[3].setPosition(50, 450);
+            window.draw(Player[0], multiplicativeBlending);
+            window.draw(Player[1], multiplicativeBlending);
+            window.draw(Player[2], multiplicativeBlending);
+            window.draw(Player[3], multiplicativeBlending);
+        }
+    }
+}
+
+void GUI::playerdata(string x)
+{
+    sf::Font font;
+    font.loadFromFile(ARIAL_FONT);
+    text.setFont(font);
+    text.setString(x);
+    text.setCharacterSize(15);
+    text.setFillColor(outlineColor);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(1400, 100),
+
+    //playerdata.setsize(sf::vector2f(150, 150));
+    //playerdata.setoutlinethickness(0); // can be outlinethickness to show border
+    //playerdata.setoutlinecolor(outlinecolor);
+    //playerdata.setposition(1400, 100);
+
+    //window.draw(Playerdata, multiplicativeBlending);
+    window.draw(text, sf::RenderStates());
+}
+
+void GUI::playbutton(bool x)
+{
+    playbuttonbool = x;
+}
+
+
+//void GUI::input()
+//{
+//    sf::Font arialFont;
+//    arialFont.loadFromFile(ARIAL_FONT);
+//    sf::Event event;
+//    playerText.setCharacterSize(25);
+//    playerText.setFont(arialFont);
+//    playerText.setPosition(15, 50);
+//    playerText.setFillColor(outlineColor);
+//    std::string playerInput;
+//
+//    sf::Texture okButtonTexture;
+//    okButtonTexture.loadFromFile("Images\\ok.png");
+//    okButton.setSize(sf::Vector2f(40.0f, 40.0f));
+//    okButton.setTexture(&okButtonTexture);
+//    okButton.setPosition(120.0f, 125.0f);
+//    okButton.setOutlineThickness(outlineThickness);
+//    okButton.setOutlineColor(outlineColor);
+//    okButtonTexture.setSmooth(true);
+//
+//    while (userinput.pollEvent(event))
+//    {
+//        if (event.type == sf::Event::TextEntered)
+//        {
+//            playerInput += event.text.unicode;
+//            if (stoi(playerInput) >= 1 && stoi(playerInput) <= 4)
+//            {
+//                numofplayer = stoi(playerInput);
+//            }
+//            else
+//            {
+//                playerText.setString("Choose Between 1 and 4");
+//            }
+//            playerText.setString(playerInput);
+//        }
+//    }
+//    userinput.clear(backgroundColor);
+//    userinput.draw(okButton);
+//    userinput.draw(playerText);
+//    userinput.display();
+//}

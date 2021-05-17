@@ -12,11 +12,20 @@
 class GUI
 {
 private:
+    //edits
     int textbox = 0;
+    string numofplayer;
+    bool playbuttonbool;
+    sf::Text Player2;
+    sf::Text Player3;
+    sf::Text Player4;
+
+
     sf::Vector2f mouseposition; //mousepositon for textbox function .. etc
 
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
+    //sf::RenderWindow userinput; //Represents the user input
     
     //Blending mode, mix between the image and the rectangle-credits to ENG KAREEEEEEEEEEEEEEEEEEEEEEEM*******
     sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
@@ -34,7 +43,7 @@ private:
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
 
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4], rectangleleft[8], rectangleright[8], rectangleup[9],rectangledown[9],Luckrectangle,Courtrectangle; // Rectangle edges of the board components
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4], rectangleleft[8], rectangleright[8], rectangleup[9],rectangledown[9],Luckrectangle,Courtrectangle ,Player[4], players_2, players_3, players_4; // Rectangle edges of the board components
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -55,12 +64,16 @@ public:
     void drawEdge(float position, bool EdgeDir);// Draws boarders of the spaces, The positions can be read from a file
     void loadDiceSides();//load dice side in textures
     void drawRollDice();// rolling the dice
+    //void input();
 
     void drawrect(); //draw rectangle as you want
+    void player(); // draw player's avatar
     void loadtextbox(string textbox, sf::Vector2f); //display the text box
     void drawtextbox();
+    void playerdata(string textbox);
     void settextbox(int x);
     void setmousepos(sf::Vector2f);
+    void playbutton(bool); //checks if the play button is pressed or not
 };
 
 //https://www.rapidtables.com/web/color/RGB_Color.html to generate the color we want by using sf::Color::Color(red value ,green value , blue value);

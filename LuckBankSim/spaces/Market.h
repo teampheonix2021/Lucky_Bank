@@ -9,6 +9,6 @@ public:
 	int getMarketPrice();
 	void setMarketFees(int a);
 	int getMarketFees();
-
+	explicit Market();
 };
 

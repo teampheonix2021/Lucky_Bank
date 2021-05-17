@@ -4,9 +4,7 @@
 #include <sstream>
 using namespace std;
 
-City::City()
-{
-}
+City::City() {}
 
 void City::setGroup(int a)
 {
@@ -16,8 +14,6 @@ void City::setGroup(int a)
 //SpaceInfo
 void City::Readcities()
 {
-	int counter = 0;
-	City *C= new City[counter];
 	fstream infile;
 	infile.open("BankOfLuckFiles\\spaceinfo.txt");
 	if (!infile)
@@ -30,7 +26,7 @@ void City::Readcities()
 		char* context = nullptr;
 		const int size = 300;
 		char line[size];
-		
+		City* C = new City[counter];
 
 		while (infile.getline(line, size))
 		{
@@ -67,7 +63,8 @@ void City::Readcities()
 			}
 		}
 		infile.close();
-
 	}
-
 }
+
+
+

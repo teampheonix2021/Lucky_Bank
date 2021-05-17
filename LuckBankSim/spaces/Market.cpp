@@ -1,5 +1,8 @@
 #include "Market.h"
 
+
+Market::Market() {};
+
 void Market::setMarketPrice(int a)
 {
 	MarketPrice = a;
@@ -7,15 +10,15 @@ void Market::setMarketPrice(int a)
 
 int Market::getMarketPrice()
 {
-	return this->MarketPrice;
+	return MarketPrice;
 }
 
-void Market::setMarketFees(int a)
+void Market::setMarketFees(int x)
 {
-	MarketFees = a;
+	MarketFees = x;
 }
 
 int Market::getMarketFees()
 {
-	return this->MarketFees;
+	return MarketFees;
 }

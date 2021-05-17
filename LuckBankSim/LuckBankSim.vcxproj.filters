@@ -31,20 +31,26 @@
     <ClCompile Include="BoardObjects\TextBox.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
-    <ClCompile Include="City.cpp">
+    <ClCompile Include="BoardObjects\Player.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="spaces\City.cpp">
       <Filter>Source Files\Spaces</Filter>
     </ClCompile>
-    <ClCompile Include="Parking.cpp">
+    <ClCompile Include="spaces\Parking.cpp">
       <Filter>Source Files\Spaces</Filter>
     </ClCompile>
-    <ClCompile Include="RestArea.cpp">
+    <ClCompile Include="spaces\RestArea.cpp">
       <Filter>Source Files\Spaces</Filter>
     </ClCompile>
-    <ClCompile Include="space.cpp">
+    <ClCompile Include="spaces\space.cpp">
       <Filter>Source Files\Spaces</Filter>
     </ClCompile>
-    <ClCompile Include="Market.cpp">
+    <ClCompile Include="spaces\Market.cpp">
       <Filter>Source Files\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjects\PlayerData.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,20 +87,26 @@
     <ClInclude Include="BoardObjects\TextBox.h">
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
-    <ClInclude Include="space.h">
+    <ClInclude Include="BoardObjects\Player.h">
+      <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="spaces\City.h">
       <Filter>Header Files\spaces</Filter>
     </ClInclude>
-    <ClInclude Include="City.h">
+    <ClInclude Include="spaces\Market.h">
       <Filter>Header Files\spaces</Filter>
     </ClInclude>
-    <ClInclude Include="Parking.h">
+    <ClInclude Include="spaces\Parking.h">
       <Filter>Header Files\spaces</Filter>
     </ClInclude>
-    <ClInclude Include="RestArea.h">
+    <ClInclude Include="spaces\RestArea.h">
       <Filter>Header Files\spaces</Filter>
     </ClInclude>
-    <ClInclude Include="Market.h">
+    <ClInclude Include="spaces\space.h">
       <Filter>Header Files\spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjects\PlayerData.h">
+      <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

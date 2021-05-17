@@ -4,6 +4,7 @@
 using namespace std::chrono;
 #include "GUI.h"
 #include "Defs.h"
+#include "BoardObjects/Player.h"
 #include "BoardObjects/Text.h"
 #include "BoardObjects/Menu.h"
 #include "BoardObjects/Dice.h"
@@ -11,6 +12,7 @@ using namespace std::chrono;
 #include "BoardObjects/MessageBox.h"
 #include "BoardObjects/Rectangle.h"
 #include "BoardObjects/TextBox.h"
+#include "BoardObjects/PlayerData.h"
 
 // Represents a game, keeps track of everything relevant to the game and delegates the tasks to their proper objects
 class Game
@@ -25,6 +27,9 @@ private:
     Text text;
     rectangle rect; //draw a rectangle
     textbox textbo;
+    Player player;
+    PlayerData data;
+
     bool exit;  // Flags about the user's exit keygame controls
     
 
