@@ -10,6 +10,7 @@ using namespace std::chrono;
 #include "BoardObjects/Dice.h"
 #include "BoardObjects/Edge.h"
 #include "BoardObjects/MessageBox.h"
+#include "BoardObjects/MessageBox2.h"
 #include "BoardObjects/Rectangle.h"
 #include "BoardObjects/TextBox.h"
 #include "BoardObjects/PlayerData.h"
@@ -34,6 +35,7 @@ private:
     PlayerData data;
     DrawCity City;
     Avatar avatar;
+    MessageBox2 messageBox2;
 
     bool exit;  // Flags about the user's exit keygame controls
     

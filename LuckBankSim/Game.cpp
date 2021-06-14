@@ -43,6 +43,7 @@ void Game::updateGUIOutput()
    //Drawing the message box
 
     messageBox.draw(gui);
+    messageBox2.draw(gui);
    
     //drawing the text box to the user
     textbo.draw(gui);

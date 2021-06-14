@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <random>
@@ -8,6 +9,7 @@
 #include "spaces/City.h"
 #include "spaces/Court.h"
 #include "spaces/Luck.h"
+
 
 
 // Represents the game GUI
@@ -25,20 +27,37 @@ private:
     int courcards = 0;
     int textbox = 0;
     int roll;
+    int move;
+    int loop = 0;
+    sf::Vector2f position = sf::Vector2f(200, 750);
     string numofplayer;
+    string icons[4] = {};
+    string checkmessagebox2 = "";
     bool playbuttonbool = false;
     bool drawavatarbool = false;
-    int i = 0;
-    sf::Text Player2;
-    sf::Text Player3;
-    sf::Text Player4;
 
+    sf::Clock countdown;
+    sf::Time timer = sf::seconds(5);
+    bool once = false; // In drawmessagebox2 
+    bool once2 = false;
+    bool isopen2 = false;
+    bool pressed1 = false;
+    bool pressed2 = false;
+    bool pressed3 = false;
+    bool pressed4 = false;
+    int temp = 0;
+
+
+    // sf::sleep(sf::milliseconds(1000));       for sleeping
+    sf::Texture avata[4];
+    sf::Vector2f avatar1;
 
     sf::Vector2f mouseposition; //mousepositon for textbox function .. etc
 
     sf::RenderWindow window;  // Represents the game window
     sf::RenderWindow messagePrompt;//Represents the messageBox window
     sf::RenderWindow userinput; //Represents the user input
+    sf::RenderWindow messagePrompt2;
     
     //Blending mode, mix between the image and the rectangle-credits to ENG KAREEEEEEEEEEEEEEEEEEEEEEEM*******
     sf::BlendMode multiplicativeBlending = sf::BlendMultiply; //mixing
@@ -56,7 +75,9 @@ private:
     const float outlineThickness = -1.0f;  // Negative sign means inwards
     // array of rectangles to draw any number of rectangles you want .. just change the size to the number of rectangles you want
 
-    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,rectangle[4],Board[34],Luckrectangle,Courtrectangle ,Player[4], players_2, players_3, players_4, Avatar[4]; // Rectangle edges of the board components
+    sf::RectangleShape textRect, playRect, diceRect, saverect, okButton,okButton2 , rectangle[4], Board[34], Luckrectangle, Courtrectangle, Player[4], players_2, players_3, players_4, Avatar[4], Ic1, Ic2, Ic3, Ic4; // Rectangle edges of the board components
+    sf::SoundBuffer buffers[1]; // buffer for sounds ( like Texture )
+    sf::Sound playsound; // Variables for sounds ( like sprite )
     sf::Texture diceTexture[6];// dicesides
     sf::Text   text;// load Text
     int  numberOfRolling = 0, lastRoll = 0; // For rolling dice
@@ -94,7 +115,12 @@ public:
     void drawluck(int);
     void drawluckcourt(string path, float offsetPositionX, float offsetPositionY, float scaleX, float scaleY);
     void drawavatar();
-    void moveavatar();
+    void moveavatar(int roll);
+    void loadavatars();
+    void random();
+    void loadsounds();
+    void drawMessageBox2();
+    //void delay(int number_of_seconds); //delay function
 };
 
 //https://www.rapidtables.com/web/color/RGB_Color.html to generate the color we want by using sf::Color::Color(red value ,green value , blue value);

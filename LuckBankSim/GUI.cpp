@@ -18,6 +18,7 @@ GUI::GUI()
 
    //load the dice sides array 
    loadDiceSides();
+   loadsounds();
    C.Readcities(C);
    L.ReadLuckCourt(L);
    Co.ReadLuckCourt(Co);
@@ -55,7 +56,7 @@ void GUI::getControls(bool& exit)
             if (Courtrect.contains(mousePos))
             {
                 courcards = rand() % 15;
-                drawluck(courcards);
+                drawcourt(courcards);
             }
         }
 
@@ -157,21 +158,24 @@ void GUI::getControls(bool& exit)
             //if the mouse left button is pressed on the dice button, the side is changed
             if (diceBtnBounds.contains(mousePos))
             {
-                if (!diceIsRolled)
+                if (diceIsRolled == 0)
                 {
                     lastRoll = 0;
                     numberOfRolling = 0;
-                }
-                moveavatar();
+                }  
+                random();
             }
 
             //if mouse left button is pressed on the play button, The message box is appread
             if (playBtnBounds.contains(mousePos))
             {
+                isopen2 = false;
+                playsound.setBuffer(buffers[0]);
+                playsound.play();
                 playbutton(true);
                 sf::ContextSettings settings;
                 settings.antialiasingLevel = 8;  // Remove this line if the Board was too laggy
-                messagePrompt.create(sf::VideoMode(265, 166), "messageBox", sf::Style::Titlebar, settings);
+                messagePrompt.create(sf::VideoMode(265, 166), "Players", sf::Style::Titlebar, settings);
                 //userinput.create(sf::VideoMode(265, 166), "Avatar", sf::Style::Titlebar, settings);
                 messagePrompt.setVerticalSyncEnabled(true);
             }
@@ -188,11 +192,46 @@ void GUI::getControls(bool& exit)
 
             if (okButtonBounds.contains(mousePos))
             {
+                sf::ContextSettings settings;
+                settings.antialiasingLevel = 8;
+                messagePrompt2.create(sf::VideoMode(265, 166), "Icons", sf::Style::Titlebar, settings);
+                //messagePrompt2.setPosition(messagePrompt2.getPosition() + sf::Vector2i(50, 50));
+                messagePrompt2.setVerticalSyncEnabled(true);
                 messagePrompt.close();
             }
 
         }
     }//loop of messagebox events
+
+
+    while (messagePrompt2.pollEvent(event))
+    {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            sf::Vector2f mousePos = messagePrompt2.mapPixelToCoords(sf::Mouse::getPosition(messagePrompt2));
+            sf::FloatRect okButtonBounds = okButton2.getGlobalBounds();
+
+            if (okButtonBounds.contains(mousePos))
+            {
+                okButton2.setPosition(0,0);
+                once2 = true;
+                once = false;
+                loop = 0;
+                temp = 0;
+                checkmessagebox2 = "";
+                messagePrompt2.close();
+                if (once2 == true)
+                {
+                    loadavatars();
+                    pressed1 = false;
+                    pressed2 = false;
+                    pressed3 = false;
+                    pressed4 = false;
+                }
+                isopen2 = true;
+            }
+        }
+    }
 
     //while (userinput.pollEvent(event))
     //{
@@ -308,7 +347,7 @@ void GUI::drawMenuItems()
 
 void GUI::drawText()
 {
-    if (playbuttonbool == true && messagePrompt.isOpen() == false)
+    if (playbuttonbool == true && isopen2 == true)
     {
         loadText("Please click here to roll the dice", 628.0f, 470.0f);
     }
@@ -591,15 +630,15 @@ void GUI::loadDiceSides()
 // //this function is invoked from dice object to roll the dice
 void GUI::drawRollDice()
 {
-    if (playbuttonbool == true && messagePrompt.isOpen() == false)
+    if (playbuttonbool == true && isopen2 == true)
     {
         // decrease the second condition to see the suffeling among dice sides ex: numberOfRolling - lastRoll == 8
         if (numberOfRolling <= 10 && numberOfRolling - lastRoll == 2)
         {
-            int  dicePicNumber = rand() % 6;
-            diceRect.setTexture(&diceTexture[dicePicNumber]);
+            int dicenumber = rand() % 6;
+            diceRect.setTexture(&diceTexture[dicenumber]);
+            diceRect.setTexture(&diceTexture[roll]);
             lastRoll = numberOfRolling;
-            roll = dicePicNumber + 1;
         }
         //draw the new side
         window.draw(diceRect, multiplicativeBlending);
@@ -901,7 +940,7 @@ void GUI::drawtextbox()
 
     if (textbox == 8)
     {
-        if (messagePrompt.isOpen() == false && playbuttonbool == true)
+        if (isopen2 == true && playbuttonbool == true)
         {
             citydata(C.Name[0], C.Price[0], C.PassingFees[0], C.getparkprice(0), C.getparkfees(0), C.getrestprice(0), C.getrestfees(0), C.getmarketprice(0), C.getmarketfees(0),1);
         }
@@ -920,39 +959,51 @@ void GUI::setmousepos(sf::Vector2f x)
 
 void GUI::player()
 {
-    if (messagePrompt.isOpen() == false)
+    if (isopen2 == true)
     {
+        sf::Texture p1, p2, p3, p4;
         if (numofplayer == "2")
         {
+            p1.loadFromFile("Images\\" + icons[1]);
             Player[0].setSize(sf::Vector2f(100, 100));
             Player[0].setOutlineColor(outlineColor);
             Player[0].setOutlineThickness(outlineThickness);
             Player[0].setPosition(50, 750);
+            Player[0].setTexture(&p1);
 
+            p2.loadFromFile("Images\\" + icons[0]);
             Player[1].setSize(sf::Vector2f(100, 100));
             Player[1].setOutlineColor(outlineColor);
             Player[1].setOutlineThickness(outlineThickness);
             Player[1].setPosition(50, 650);
+            Player[1].setTexture(&p2);
+
             window.draw(Player[0], multiplicativeBlending);
             window.draw(Player[1], multiplicativeBlending);
         }
 
         else if (numofplayer == "3")
         {
+            p1.loadFromFile("Images\\" + icons[2]);
             Player[0].setSize(sf::Vector2f(100, 100));
             Player[0].setOutlineColor(outlineColor);
             Player[0].setOutlineThickness(outlineThickness);
             Player[0].setPosition(50, 750);
+            Player[0].setTexture(&p1);
 
+            p2.loadFromFile("Images\\" + icons[1]);
             Player[1].setSize(sf::Vector2f(100, 100));
             Player[1].setOutlineColor(outlineColor);
             Player[1].setOutlineThickness(outlineThickness);
             Player[1].setPosition(50, 650);
+            Player[1].setTexture(&p2);
 
+            p3.loadFromFile("Images\\" + icons[0]);
             Player[2].setSize(sf::Vector2f(100, 100));
             Player[2].setOutlineColor(outlineColor);
             Player[2].setOutlineThickness(outlineThickness);
             Player[2].setPosition(50, 550);
+            Player[2].setTexture(&p3);
 
             window.draw(Player[0], multiplicativeBlending);
             window.draw(Player[1], multiplicativeBlending);
@@ -961,25 +1012,33 @@ void GUI::player()
 
         else if (numofplayer == "4")
         {
+            p1.loadFromFile("Images\\" + icons[3]);
             Player[0].setSize(sf::Vector2f(100, 100));
             Player[0].setOutlineColor(outlineColor);
             Player[0].setOutlineThickness(outlineThickness);
             Player[0].setPosition(50, 750);
+            Player[0].setTexture(&p1);
 
+            p2.loadFromFile("Images\\" + icons[2]);
             Player[1].setSize(sf::Vector2f(100, 100));
             Player[1].setOutlineColor(outlineColor);
             Player[1].setOutlineThickness(outlineThickness);
             Player[1].setPosition(50, 650);
+            Player[1].setTexture(&p2);
 
+            p3.loadFromFile("Images\\" + icons[1]);
             Player[2].setSize(sf::Vector2f(100, 100));
             Player[2].setOutlineColor(outlineColor);
             Player[2].setOutlineThickness(outlineThickness);
             Player[2].setPosition(50, 550);
+            Player[2].setTexture(&p3);
 
+            p4.loadFromFile("Images\\" + icons[0]);
             Player[3].setSize(sf::Vector2f(100, 100));
             Player[3].setOutlineColor(outlineColor);
             Player[3].setOutlineThickness(outlineThickness);
             Player[3].setPosition(50, 450);
+            Player[3].setTexture(&p4);
 
             window.draw(Player[0], multiplicativeBlending);
             window.draw(Player[1], multiplicativeBlending);
@@ -1036,7 +1095,7 @@ void GUI::citydata(string name, int price, int passingfees, int Garageprice, int
 //drawing cities on board with Auto Functions
 void GUI::DrawCity()
 {
-    if (messagePrompt.isOpen() == false && playbuttonbool == true)
+    if (isopen2 == true && playbuttonbool == true)
     {
         for (int i = 0, name = 0; name < C.Name.size(); i++, name++)
         {
@@ -1180,7 +1239,7 @@ void GUI::DrawCity()
 
 
                 window.draw(price, sf::RenderStates()),
-                    window.draw(Ci, sf::RenderStates());
+                window.draw(Ci, sf::RenderStates());
             }
         }
     }
@@ -1268,6 +1327,7 @@ void GUI::DrawCity()
 void GUI::drawluck(int index)
 {
     drawluckcourt("BankOfLuckFiles\\Luck-Court Card\\" + L.Location[index], 950, 200, 0.5, 0.5);
+    cout << index;
 }
 
 void GUI::drawcourt(int index)
@@ -1289,59 +1349,299 @@ void GUI::drawluckcourt(std::string path, float setPositionX, float setPositionY
 
 
     window.draw(sprite);
+    //add delay here
 }
 
+// drawing the avatars of number of players
 void GUI::drawavatar()
 {
-        if (messagePrompt.isOpen() == false && playbuttonbool == true)
-        {
-            int num = stoi(numofplayer);
-            sf::Vector2f position = Board[0].getPosition();
-
-            for (i = 1; i <= num; i++)
-            {
-                sf::Texture texture;
-                texture.loadFromFile("Images\\Icon" + to_string(i) + ".jpeg");
-                //Use the sprite to load the image and scale it,  another method in loadDiceSides() function
-                sf::Sprite sprite;
-                sprite.setTexture(texture);
-                sprite.setPosition(position); // offset relative to the original position(0,0)
-                sprite.scale(sf::Vector2f(0.3, 0.3)); // factor relative to the current scale
-                window.draw(sprite);
-                if (position.x > Board[0].getPosition().x)
-                {
-                    position = Board[0].getPosition();
-                    position = position + sf::Vector2f(0, 35);
-                }
-                else
-                {
-                    position = position + sf::Vector2f(35, 0);
-                }
-            }
-        }
-        ava(true);
-}
-
-//
-void GUI::moveavatar()
-{
-    if (messagePrompt.isOpen() == false && playbuttonbool == true && drawavatarbool == true)
+    if (isopen2 == true && playbuttonbool == true)
     {
         int num = stoi(numofplayer);
-        sf::Vector2f position = Board[0].getPosition();
-        for (i = 1; i <= num; i++)
+
+        for (int j = 0; j < num; j++)
         {
-            for (int j = 1; j <= roll; j++)
+            window.draw(Avatar[j]);
+        }
+        ava(true);
+    }
+}
+
+
+// Loading the Avatars
+void GUI::loadavatars()
+{
+    position = sf::Vector2f(200, 750);
+
+    for (int i = 0; i <= stoi(numofplayer); i++)
+    {
+        avata[i].loadFromFile("Images\\" + icons[i]);
+        Avatar[i].setTexture(&avata[i]);
+        Avatar[i].setPosition(position);
+        Avatar[i].setSize(sf::Vector2f(32, 32));
+        if (position.x > 200)
+        {
+            position = sf::Vector2f(200, 750);
+            position = position + sf::Vector2f(0, 35);
+        }
+        else
+        {
+            position = position + sf::Vector2f(35, 0);
+        }
+    }
+    //// Avatar 1
+    //avata[0].loadFromFile("Images\\" + icons[0]);
+    //Avatar[0].setTexture(&avata[0]);
+    //Avatar[0].setPosition(position);
+    //Avatar[0].setSize(sf::Vector2f(32, 32));
+    //// Avatar 2
+    //avata[1].loadFromFile("Images\\" + icons[1]);
+    //Avatar[1].setTexture(&avata[1]);
+    //Avatar[1].setPosition(position + sf::Vector2f(35, 0));
+    //Avatar[1].setSize(sf::Vector2f(32, 32));
+
+    //// Avatar 3
+    //avata[2].loadFromFile("Images\\" + icons[2]);
+    //Avatar[2].setTexture(&avata[2]);
+    //Avatar[2].setPosition(position + sf::Vector2f(0, 35));
+    //Avatar[2].setSize(sf::Vector2f(32, 32));
+
+    //// Avatar 4
+    //avata[3].loadFromFile("Images\\" + icons[3]);
+    //Avatar[3].setTexture(&avata[3]);
+    //Avatar[3].setPosition(position + sf::Vector2f(0, 35) + sf::Vector2f(35, 0));
+    //Avatar[3].setSize(sf::Vector2f(32, 32));
+}
+
+void GUI::moveavatar(int roll)
+{
+    if (isopen2 == true && playbuttonbool == true && drawavatarbool == true)
+    {
+        int num = stoi(numofplayer);
+            /*for (int j = 0; j <= roll; j++)
             {
-                sf::Texture ff;
-                sf::Sprite f;
-                ff.loadFromFile("Images\\Icon" + to_string(i) + ".jpeg");
-                f.setTexture(ff);
-                f.setPosition(position);
-                f.scale(sf::Vector2f(0.3, 0.3));
-                window.draw(f);
-                position = position + sf::Vector2f(0, 100 + 100);
-            }
+                sf::Vector2f position = Board[j].getPosition();
+                Avatar[0].setPosition(position);
+            }*/
+        move += roll;
+        cout << roll << endl << move << endl;
+        if (move >= 34)
+        {
+            move = (move - 34);
+            Avatar[0].setPosition(Board[move].getPosition());
+
+        }
+        else
+        {
+            Avatar[0].setPosition(Board[move].getPosition());
         }
     }
 }
+
+void GUI::random()
+{
+    srand(time(NULL));
+    roll = rand() % 6;
+    diceRect.setTexture(&diceTexture[roll]);
+    moveavatar(roll + 1);
+    diceIsRolled = 0;
+}
+
+
+void GUI::loadsounds()
+{
+    buffers[0].loadFromFile("Sounds\\Player button.wav");
+}
+
+void GUI::drawMessageBox2()
+{
+    if (messagePrompt.isOpen() == false && playbuttonbool == true)
+    {
+        sf::Font arialFont;
+        arialFont.loadFromFile(ARIAL_FONT);
+        sf::Text messageTitle;
+        messageTitle.setString("Choose Icon");
+        messageTitle.setCharacterSize(15);
+        messageTitle.setFont(arialFont);
+        messageTitle.setPosition(15.0f, 15.0f);
+        messageTitle.setFillColor(outlineColor);
+
+        sf::Text messageTitle2;
+        messageTitle2.setString("Player Number : ");
+        messageTitle2.setCharacterSize(15);
+        messageTitle2.setFont(arialFont);
+        messageTitle2.setPosition(15.0f, 30.0f);
+        messageTitle2.setFillColor(outlineColor);
+
+
+        sf::Texture Icon1;
+        sf::Texture Icon2;
+        sf::Texture Icon3;
+        sf::Texture Icon4;
+
+        Icon1.loadFromFile("Images\\Icon1.jpeg");
+        Ic1.setSize(sf::Vector2f(40.0f, 40.0f));
+        Ic1.setPosition(15.0f, 53.0f);
+        Ic1.setOutlineThickness(0);
+        Ic1.setOutlineColor(outlineColor);
+        Ic1.setTexture(&Icon1);
+        Icon1.setSmooth(true);
+
+        Icon2.loadFromFile("Images\\Icon2.jpeg");
+        Ic2.setSize(sf::Vector2f(40.0f, 40.0f));
+        Ic2.setPosition(70.0f, 53.0f);
+        Ic2.setOutlineThickness(0);
+        Ic2.setOutlineColor(outlineColor);
+        Ic2.setTexture(&Icon2);
+        Icon2.setSmooth(true);
+
+        Icon3.loadFromFile("Images\\Icon3.jpeg");
+        Ic3.setSize(sf::Vector2f(40.0f, 40.0f));
+        Ic3.setPosition(125.0f, 53.0f);
+        Ic3.setOutlineThickness(0);
+        Ic3.setOutlineColor(outlineColor);
+        Ic3.setTexture(&Icon3);
+        Icon3.setSmooth(true);
+
+        Icon4.loadFromFile("Images\\Icon4.jpeg");
+        Ic4.setSize(sf::Vector2f(40.0f, 40.0f));
+        Ic4.setPosition(180.0f, 53.0f);
+        Ic4.setOutlineThickness(0);
+        Ic4.setOutlineColor(outlineColor);
+        Ic4.setTexture(&Icon4);
+        Icon4.setSmooth(true);
+
+        sf::Text messageTitle3;
+        messageTitle3.setString(to_string(loop + 1));
+        messageTitle3.setCharacterSize(15);
+        messageTitle3.setFont(arialFont);
+        messageTitle3.setPosition(205.0f, 30.0f);
+        messageTitle3.setFillColor(outlineColor);
+        messageTitle3.setStyle(sf::Text::Bold);
+
+
+        sf::Event event;
+        while (messagePrompt2.pollEvent(event))
+        {
+            sf::Vector2f mousePos = messagePrompt2.mapPixelToCoords(sf::Mouse::getPosition(messagePrompt2));
+            sf::FloatRect icon1 = Ic1.getGlobalBounds();
+            sf::FloatRect icon2 = Ic2.getGlobalBounds();
+            sf::FloatRect icon3 = Ic3.getGlobalBounds();
+            sf::FloatRect icon4 = Ic4.getGlobalBounds();
+
+            if (event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left )
+            {
+                if (icon1.contains(mousePos) && pressed1 == false)
+                {
+                    icons[loop] = "Icon1.jpeg";
+                    loop++;
+                    checkmessagebox2 = "Done !";
+                    pressed1 = true;
+                }
+
+                else if (icon2.contains(mousePos) && pressed2 == false)
+                {
+                    icons[loop] = "Icon2.jpeg";
+                    loop++;
+                    checkmessagebox2 = "Done !";
+                    pressed2 = true;
+                }
+
+                else if (icon3.contains(mousePos) && pressed3 == false)
+                {
+                    icons[loop] = "Icon3.jpeg";
+                    loop++;
+                    checkmessagebox2 = "Done !";
+                    pressed3 = true;
+                }
+                
+                else if (icon4.contains(mousePos) && pressed4 == false)
+                {
+                    icons[loop] = "Icon4.jpeg";
+                    loop++;
+                    checkmessagebox2 = "Done !";
+                    pressed4 = true;
+                }
+
+                else
+                {
+                    checkmessagebox2 = "Click Again !";
+                }
+            }
+        }
+        sf::Text messageTitle4;
+
+        messageTitle4.setString(checkmessagebox2);
+        messageTitle4.setCharacterSize(15);
+        messageTitle4.setFont(arialFont);
+        messageTitle4.setPosition(15.0f, 110.0f);
+        messageTitle4.setFillColor(outlineColor);
+        messageTitle4.setStyle(sf::Text::Bold);
+
+
+        sf::Text messageTitle5;
+
+        messageTitle5.setString(to_string(temp));
+        messageTitle5.setCharacterSize(15);
+        messageTitle5.setFont(arialFont);
+        messageTitle5.setPosition(120.0f, 125.0f);
+        messageTitle5.setFillColor(outlineColor);
+        messageTitle5.setStyle(sf::Text::Bold);
+
+
+        if (loop == stoi(numofplayer))
+        {
+            if (once == false)
+            {
+                countdown.restart();
+                once = true;
+            }
+            sf::Time elapsed = countdown.getElapsedTime();
+            temp = timer.asSeconds() - elapsed.asSeconds();
+        }
+
+
+        messagePrompt2.clear(backgroundColor);
+
+        messagePrompt2.draw(messageTitle);
+        messagePrompt2.draw(messageTitle2);
+        messagePrompt2.draw(messageTitle3);
+        messagePrompt2.draw(messageTitle4);
+        if (temp >= 1)
+        {
+            messagePrompt2.draw(messageTitle5);
+        }
+        else if (temp < 1 && once == true)
+        {
+            sf::Texture okButtonTexture;
+            okButtonTexture.loadFromFile("Images\\ok.png");
+            okButton2.setSize(sf::Vector2f(40.0f, 40.0f));
+            okButton2.setTexture(&okButtonTexture);
+            okButton2.setPosition(120.0f, 125.0f);
+            okButton2.setOutlineThickness(outlineThickness);
+            okButton2.setOutlineColor(outlineColor);
+            okButtonTexture.setSmooth(true);
+            messagePrompt2.draw(okButton2);
+        }
+        messagePrompt2.draw(Ic1);
+        messagePrompt2.draw(Ic2);
+        messagePrompt2.draw(Ic3);
+        messagePrompt2.draw(Ic4);
+
+        messagePrompt2.display();       
+    }
+}
+
+
+//void GUI::delay(int number_of_seconds)
+//{
+//    // Converting time into milli_seconds
+//    int milli_seconds = 1000 * number_of_seconds;
+//
+//    // Storing start time
+//    clock_t start_time = clock();
+//
+//    // looping till required time is not achieved
+//    while (clock() < start_time + milli_seconds)
+//        ;
+//}

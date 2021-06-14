@@ -73,6 +73,9 @@
     <ClCompile Include="BoardObjects\Avatar.cpp">
       <Filter>Source Files\BoardObjects</Filter>
     </ClCompile>
+    <ClCompile Include="BoardObjects\MessageBox2.cpp">
+      <Filter>Source Files\BoardObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardObjects\Drawable.h">
@@ -148,6 +151,9 @@
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
     <ClInclude Include="BoardObjects\Avatar.h">
+      <Filter>Header Files\BoardObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjects\MessageBox2.h">
       <Filter>Header Files\BoardObjects</Filter>
     </ClInclude>
   </ItemGroup>
