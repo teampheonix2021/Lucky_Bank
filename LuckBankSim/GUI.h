@@ -31,6 +31,7 @@ private:
     int movep2;
     int movep3;
     int movep4;
+    map<string, int> movemap;
     int loop = 0;
     int turns = 0;
     sf::Vector2f position = sf::Vector2f(200, 750);
@@ -119,11 +120,12 @@ public:
     void drawluck(int);
     void drawluckcourt(string path, float offsetPositionX, float offsetPositionY, float scaleX, float scaleY);
     void drawavatar();
-    void moveavatar(int roll);
+    void moveavatar(const int& roll);
     void loadavatars();
     void random();
     void loadsounds();
     void drawMessageBox2();
+    bool checkboard(int& move);
     //void delay(int number_of_seconds); //delay function
 };
 

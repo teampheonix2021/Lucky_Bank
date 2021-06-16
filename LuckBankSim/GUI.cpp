@@ -158,6 +158,7 @@ void GUI::getControls(bool& exit)
             //if the mouse left button is pressed on the dice button, the side is changed
             if (diceBtnBounds.contains(mousePos))
             {
+                sf::sleep(sf::milliseconds(400));
                 if (diceIsRolled == 0)
                 {
                     lastRoll = 0;
@@ -643,6 +644,7 @@ void GUI::drawRollDice()
             int dicenumber = rand() % 6;
             diceRect.setTexture(&diceTexture[dicenumber]);
             diceRect.setTexture(&diceTexture[roll]);
+
             lastRoll = numberOfRolling;
         }
         //draw the new side
@@ -1418,7 +1420,7 @@ void GUI::loadavatars()
     //Avatar[3].setSize(sf::Vector2f(32, 32));
 }
 
-void GUI::moveavatar(int roll)
+void GUI::moveavatar(const int& roll)
 {
     if (isopen2 == true && playbuttonbool == true && drawavatarbool == true)
     {
@@ -1438,13 +1440,18 @@ void GUI::moveavatar(int roll)
                 }
 
             }*/
+
         if (turns == num)
         {
             turns = 0;
         }
+
         if (turns == 0)
         {
-            movep1 += roll;
+            if (checkboard(movep1) == false)
+            {
+                movep1 += roll;
+            }
             if (movep1 >= 34)
             {
                 movep1 = (movep1 - 34);
@@ -1458,9 +1465,14 @@ void GUI::moveavatar(int roll)
                 turns++;
             }
         }
+
         else if (turns == 1)
         {
-            movep2 += roll;
+
+            if (checkboard(movep2) == false)
+            {
+                movep2 += roll;
+            }
             if (movep2 >= 34)
             {
                 movep2 = (movep2 - 34);
@@ -1476,7 +1488,10 @@ void GUI::moveavatar(int roll)
         }
         else if (turns == 2)
         {
-            movep3 += roll;
+            if (checkboard(movep3) == false)
+            {
+                movep3 += roll;
+            }
             if (movep3 >= 34)
             {
                 movep3 = (movep3 - 34);
@@ -1492,7 +1507,10 @@ void GUI::moveavatar(int roll)
         }
         else if (turns == 3)
         {
-            movep4 += roll;
+            if (checkboard(movep4) == false)
+            {
+                movep4 += roll;
+            }
             if (movep4 >= 34)
             {
                 movep3 = (movep4 - 34);
@@ -1513,7 +1531,6 @@ void GUI::random()
 {
     srand(time(NULL));
     roll = rand() % 6;
-    diceRect.setTexture(&diceTexture[roll]);
     moveavatar(roll + 1);
     diceIsRolled = 0;
 }
@@ -1710,6 +1727,20 @@ void GUI::drawMessageBox2()
     }
 }
 
+
+bool GUI::checkboard(int& move)
+{
+    if (move == 17)
+    {
+        int temp = (roll+1) * 2;
+        move += temp;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 //void GUI::delay(int number_of_seconds)
 //{
