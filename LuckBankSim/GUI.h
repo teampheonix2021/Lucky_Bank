@@ -27,8 +27,12 @@ private:
     int courcards = 0;
     int textbox = 0;
     int roll;
-    int move;
+    int movep1;
+    int movep2;
+    int movep3;
+    int movep4;
     int loop = 0;
+    int turns = 0;
     sf::Vector2f position = sf::Vector2f(200, 750);
     string numofplayer;
     string icons[4] = {};

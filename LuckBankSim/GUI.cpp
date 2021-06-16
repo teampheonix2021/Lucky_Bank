@@ -218,6 +218,11 @@ void GUI::getControls(bool& exit)
                 once = false;
                 loop = 0;
                 temp = 0;
+                turns = 0;
+                movep1 = 0;
+                movep2 = 0;
+                movep3 = 0;
+                movep4 = 0;
                 checkmessagebox2 = "";
                 messagePrompt2.close();
                 if (once2 == true)
@@ -1373,7 +1378,7 @@ void GUI::loadavatars()
 {
     position = sf::Vector2f(200, 750);
 
-    for (int i = 0; i <= stoi(numofplayer); i++)
+    for (int i = 0; i < stoi(numofplayer); i++)
     {
         avata[i].loadFromFile("Images\\" + icons[i]);
         Avatar[i].setTexture(&avata[i]);
@@ -1418,22 +1423,88 @@ void GUI::moveavatar(int roll)
     if (isopen2 == true && playbuttonbool == true && drawavatarbool == true)
     {
         int num = stoi(numofplayer);
-            /*for (int j = 0; j <= roll; j++)
+       /* move += roll;
+            for (int j = 0; j <= move; j++)
             {
-                sf::Vector2f position = Board[j].getPosition();
-                Avatar[0].setPosition(position);
-            }*/
-        move += roll;
-        cout << roll << endl << move << endl;
-        if (move >= 34)
-        {
-            move = (move - 34);
-            Avatar[0].setPosition(Board[move].getPosition());
+                if (move >= 34)
+                {
+                    move = (move - 34);
+                    Avatar[0].setPosition(Board[move].getPosition());
 
-        }
-        else
+                }
+                else
+                {
+                    Avatar[0].setPosition(Board[move].getPosition());
+                }
+
+            }*/
+        if (turns == num)
         {
-            Avatar[0].setPosition(Board[move].getPosition());
+            turns = 0;
+        }
+        if (turns == 0)
+        {
+            movep1 += roll;
+            if (movep1 >= 34)
+            {
+                movep1 = (movep1 - 34);
+                Avatar[turns].setPosition(Board[movep1].getPosition());
+                turns++;
+
+            }
+            else
+            {
+                Avatar[turns].setPosition(Board[movep1].getPosition());
+                turns++;
+            }
+        }
+        else if (turns == 1)
+        {
+            movep2 += roll;
+            if (movep2 >= 34)
+            {
+                movep2 = (movep2 - 34);
+                Avatar[turns].setPosition(Board[movep2].getPosition() + sf::Vector2f(35.0,0.0));
+                turns++;
+
+            }
+            else
+            {
+                Avatar[turns].setPosition(Board[movep2].getPosition() + sf::Vector2f(35.0, 0.0));
+                turns++;
+            }
+        }
+        else if (turns == 2)
+        {
+            movep3 += roll;
+            if (movep3 >= 34)
+            {
+                movep3 = (movep3 - 34);
+                Avatar[turns].setPosition(Board[movep3].getPosition() + sf::Vector2f(0.0, 35.0));
+                turns++;
+
+            }
+            else
+            {
+                Avatar[turns].setPosition(Board[movep3].getPosition() + sf::Vector2f(0.0, 35.0));
+                turns++;
+            }
+        }
+        else if (turns == 3)
+        {
+            movep4 += roll;
+            if (movep4 >= 34)
+            {
+                movep3 = (movep4 - 34);
+                Avatar[turns].setPosition(Board[movep4].getPosition() + sf::Vector2f(35.0, 35.0));
+                turns++;
+
+            }
+            else
+            {
+                Avatar[turns].setPosition(Board[movep4].getPosition() + sf::Vector2f(35.0, 35.0));
+                turns++;
+            }
         }
     }
 }
@@ -1512,7 +1583,14 @@ void GUI::drawMessageBox2()
         Icon4.setSmooth(true);
 
         sf::Text messageTitle3;
-        messageTitle3.setString(to_string(loop + 1));
+        if (loop < stoi(numofplayer))
+        {
+            messageTitle3.setString(to_string(loop + 1));
+        }
+        else
+        {
+            messageTitle3.setString(to_string(loop));
+        }
         messageTitle3.setCharacterSize(15);
         messageTitle3.setFont(arialFont);
         messageTitle3.setPosition(205.0f, 30.0f);
@@ -1529,7 +1607,7 @@ void GUI::drawMessageBox2()
             sf::FloatRect icon3 = Ic3.getGlobalBounds();
             sf::FloatRect icon4 = Ic4.getGlobalBounds();
 
-            if (event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left )
+            if (event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && loop < stoi(numofplayer))
             {
                 if (icon1.contains(mousePos) && pressed1 == false)
                 {
